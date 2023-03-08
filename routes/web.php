@@ -17,6 +17,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/user', function () {
+    return view('user');
+});
+
+Route::get('/chat', function () {
+    return view('chat');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

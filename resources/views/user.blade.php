@@ -1,9 +1,8 @@
 @extends('layout')
 
 @section('head')
-  <title>Home</title>
+  <title>User</title>
 @endsection
 
 @section('main_content')
-    <br/>
 @endsection

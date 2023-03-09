@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     @yield('head')
@@ -13,7 +14,7 @@
         <a class="logo" href="/"><ion-icon name="planet-outline" alt="logo"></ion-icon></a>
         <nav>
             <ul class="nav__links">
-                <li><a href="#">Services</a></li>
+                <li><a href="/chat">Chat</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="{{ route('login') }}">Login</a></li>
             </ul>
@@ -25,7 +26,7 @@
     <div class="overlay">
         <a class="close">&times;</a>
         <div class="overlay__content">
-            <a href="#">Services</a>
+            <a href="/chat">Chat</a>
             <a href="#">Projects</a>
             <a href="{{ route('login') }}">Login</a>
             <a href="{{ route('register') }}">Signup</a>

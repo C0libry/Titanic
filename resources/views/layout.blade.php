@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <a class="logo" href="#"><ion-icon name="planet-outline" alt="logo"></ion-icon></a>
+        <a class="logo" href="/"><ion-icon name="planet-outline" alt="logo"></ion-icon></a>
         <nav>
             <ul class="nav__links">
                 <li><a href="#">Services</a></li>

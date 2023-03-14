@@ -17,7 +17,7 @@
                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                     <!-- Validation Errors -->
-                    <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                    <x-auth-validation-errors class="mb-4 error" :errors="$errors" />
 
                     <form class="mx-1 mx-md-4" method="POST" action="{{ route('register') }}">
                         @csrf
@@ -26,7 +26,7 @@
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input id="name" class="form-control block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-                            <label class="form-label" for="form3Example1c">Your Name</label>
+                            <label class="form-label">Your Name</label>
                         </div>
                         </div>
 
@@ -34,7 +34,15 @@
                         <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input id="surname" class="form-control block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus />
-                            <label class="form-label" for="form3Example1c">Your Surname</label>
+                            <label class="form-label">Your Surname</label>
+                        </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            <input id="username" class="form-control block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus />
+                            <label class="form-label">Your Username</label>
                         </div>
                         </div>
 
@@ -42,7 +50,7 @@
                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input id="email" class="form-control block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-                            <label class="form-label" for="form3Example3c">Your Email</label>
+                            <label class="form-label">Your Email</label>
                         </div>
                         </div>
 
@@ -53,7 +61,7 @@
                                     type="password"
                                     name="password"
                                     required autocomplete="new-password" />
-                            <label class="form-label" for="form3Example4c">Password</label>
+                            <label class="form-label">Password</label>
                         </div>
                         </div>
 
@@ -63,13 +71,13 @@
                             <input id="password_confirmation" class="form-control block mt-1 w-full"
                                     type="password"
                                     name="password_confirmation" required />
-                            <label class="form-label" for="form3Example4cd">Repeat your password</label>
+                            <label class="form-label">Repeat your password</label>
                         </div>
                         </div>
 
                         <div class="form-check d-flex justify-content-center mb-5">
                         <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
-                        <label class="form-check-label" for="form2Example3">
+                        <label class="form-check-label">
                             I agree all statements in <a href="#!">Terms of service</a>
                         </label>
                         </div>

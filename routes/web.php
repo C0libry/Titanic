@@ -13,17 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'MainController@home');
 
-Route::get('/user', function () {
-    return view('user');
-});
+Route::get('/user', 'MainController@user');
 
-Route::get('/chat', function () {
-    return view('chat');
-});
+Route::get('/chat', 'MainController@chat');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

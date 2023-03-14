@@ -8,6 +8,16 @@ class MainController extends Controller
 {
     public function home()
     {
-        return view('welcome');
+        return view('home');
+    }
+    
+    public function user()
+    {
+        return view('user');
+    }
+
+    public function chat()
+    {
+        return view('chat');
     }
 }

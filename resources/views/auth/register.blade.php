@@ -31,6 +31,14 @@
                         </div>
 
                         <div class="d-flex flex-row align-items-center mb-4">
+                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                        <div class="form-outline flex-fill mb-0">
+                            <input id="surname" class="form-control block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus />
+                            <label class="form-label" for="form3Example1c">Your Surname</label>
+                        </div>
+                        </div>
+
+                        <div class="d-flex flex-row align-items-center mb-4">
                         <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                         <div class="form-outline flex-fill mb-0">
                             <input id="email" class="form-control block mt-1 w-full" type="email" name="email" :value="old('email')" required />

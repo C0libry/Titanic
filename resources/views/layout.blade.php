@@ -17,7 +17,7 @@
             <ul class="nav__links">
                 <li><a href="{{ route('chat') }}">Chat</a></li>
                 <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
-                <li><img class="profile_picture" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar"></li>
+                <li><a href="{{ route('user') }}"><img class="profile_picture" src = "/storage/{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
             </ul>
         </nav>
         <form class="cta" method="POST" action="{{ route('logout') }}">
@@ -49,7 +49,6 @@
         <a class="logo" href="{{ route('home') }}"><ion-icon name="planet-outline" alt="logo"></ion-icon></a>
         <nav>
             <ul class="nav__links">
-                <li><a href="{{ route('chat') }}">Chat</a></li>
                 <li><a href="{{ route('login') }}">Login</a></li>
             </ul>
         </nav>
@@ -60,7 +59,6 @@
     <div class="overlay">
         <a class="close"><ion-icon class="close" name="close-outline">&times;</ion-icon></a>
         <div class="overlay__content">
-            <a href="{{ route('chat') }}">Chat</a>
             <a href="{{ route('login') }}">Login</a>
             <a href="{{ route('register') }}">Signup</a>
         </div>

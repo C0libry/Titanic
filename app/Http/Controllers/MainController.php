@@ -17,15 +17,6 @@ class MainController extends Controller
 
     public function chat()
     {
-        // $chat_id = 6;
-        // $chat_history_id = 'chat_history_' . $chat_id;
-        // Schema::create($chat_history_id, function (Blueprint $table) {
-        //     $table->id();
-        //     $table->bigInteger('sender_user_id')->unsigned()->index()->nullable();
-        //     $table->foreign('sender_user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-        //     $table->text('content');
-        //     $table->timestamps();
-        // });
         return view('chat');
     }
     

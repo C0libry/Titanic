@@ -17,9 +17,13 @@
             <ul class="nav__links">
                 <li><a href="{{ route('chat') }}">Chat</a></li>
                 <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
-                <li><a href="{{ route('user') }}"><img class="profile_picture" src = "/storage/{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
             </ul>
         </nav>
+        @if ( Auth::user()->profile_picture)
+            <li><a href="{{ route('user') }}"><img class="profile_picture" src = "/storage/{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
+        @else
+            <li><a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a></li>
+        @endif
         <form class="cta" method="POST" action="{{ route('logout') }}">
             @csrf
 

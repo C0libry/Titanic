@@ -15,7 +15,7 @@
                     <div id="plist" class="people-list">
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                <button class="input-group-text" id = "search"><i class="fa fa-search"></i></button>
                             </div>
                             <input type="text" class="form-control" placeholder="Search...">
                         </div>
@@ -87,30 +87,45 @@
                         <div class="chat-history">
                             <ul class="m-b-0">
                                 <li class="clearfix">
-                                    <div class="message-data text-right">
+                                    <div class="message-data text-right my-message-data">
                                         <span class="message-data-time">10:10 AM, Today</span>
                                         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
                                     </div>
-                                    <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div>
+                                    <div class="message my-message float-right">
+                                        <div>Hi Aiden, how are you? How is the project coming along?</div>
+                                    </div>
                                 </li>
                                 <li class="clearfix">
-                                    <div class="message-data">
+                                    <div class="message-data other-message-data">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
                                         <span class="message-data-time">10:12 AM, Today</span>
                                     </div>
-                                    <div class="message my-message">Are we meeting today?</div>                                    
+                                    <div class="message other-message">Are we meeting today?</div>                                
                                 </li>                               
                                 <li class="clearfix">
-                                    <div class="message-data">
+                                    <div class="message-data other-message-data">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
                                         <span class="message-data-time">10:15 AM, Today</span>
                                     </div>
-                                    <div class="message my-message">Project has been already finished and I have results to show you.</div>
+                                    <div class="message other-message">Project has been already finished and I have results to show you.</div>
+                                </li>
+                                
+                                <li class="clearfix">
+                                    <div class="message-data text-right my-message-data">
+                                        <span class="message-data-time">10:16 AM, Today</span>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                    </div>
+                                    <div class="message my-message float-right">
+                                        <i class="fa fa-circle unread"></i>
+                                        <div>Wele done! Project has been already all in finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show you</div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="chat-message clearfix">
                             <div class="input-group mb-0">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-send"></i></span>
+                                    <button class="input-group-text" id = "post"><i class="fa fa-send"></i></button>
                                 </div>
                                 <input type="text" class="form-control" placeholder="Enter text here...">                                    
                             </div>

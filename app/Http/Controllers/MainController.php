@@ -19,23 +19,4 @@ class MainController extends Controller
     {
         return view('chat');
     }
-    
-    public function store(UpdateUserDataRequest $request)
-    {
-        $image = $request->file('image');
-        $path = $image->store('Profile pictures');
-    }
-    
-    public function fileUpload(Request $request)
-    {
-        if($request->isMethod('post'))
-        {
-            if($request->hasFile('image'))
-            {
-                $file = $request->file('image');
-                $file->move(public_path() . '/path','filename.img');
-            }
-        }
-        return view('user');
-    }
 }

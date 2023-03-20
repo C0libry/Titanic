@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'MainController@home');
+Route::get('/', 'MainController@home')-> name('home');
 
-Route::get('/user', 'MainController@user');
-
-Route::get('/chat', 'MainController@chat');
+Route::get('/chat', 'MainController@chat')-> name('chat');
 
 Route::get('/user', function () {
     return view('user');
 })->middleware(['auth'])->name('user');
 
 require __DIR__.'/auth.php';
+
+Route::get('/user/{id}/edit', 'UserController@edit_user_data')->name('edit_user_data');
+
+Route::post('/user/{id}/edit', 'UserController@update_user_data')->name('update_user_data');

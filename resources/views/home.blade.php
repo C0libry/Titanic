@@ -5,5 +5,4 @@
 @endsection
 
 @section('main_content')
-    <br/>
 @endsection

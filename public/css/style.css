@@ -68,6 +68,22 @@ header {
     color: #24252a;
 }
 
+.logout {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+.logout:hover {
+    color: #24252a;
+}
+
+.profile_picture {
+    width: 45px;
+    border-radius: 50%
+}
+
 /* Mobile Nav */
 
 .menu {
@@ -117,6 +133,11 @@ header {
     font-size: 60px;
     color: #edf0f1;
     cursor: pointer;
+}
+
+.close:hover
+{
+    color: #0088a9;
 }
 
 .error {

@@ -2,7 +2,7 @@
 
 @section('head')
   <title>Chat</title>
-  <link rel="stylesheet" href="css/chat.css"/>
+  <link rel="stylesheet" href="{{ asset('css/chat.css') }}"/>
 @endsection
 
 @section('main_content')

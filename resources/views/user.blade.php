@@ -36,6 +36,15 @@
                 <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
               </div>
             </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Edit user data</p>
+              </div>
+              <div class="col-sm-9">
+                <a href="{{ route('edit_user_data', Auth::user()->id) }}">Edit</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

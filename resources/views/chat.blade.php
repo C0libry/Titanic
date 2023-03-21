@@ -127,7 +127,7 @@
                                 <div class="input-group-prepend">
                                     <button class="input-group-text" id = "post"><i class="fa fa-send"></i></button>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Enter text here...">                                    
+                                <input type="text" class="form-control" name="user_message" placeholder="Enter text here...">                                    
                             </div>
                         </div>
                     </div>

@@ -15,11 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainController@home')-> name('home');
 
-Route::get('/chat', 'MainController@chat')-> name('chat');
+Route::get('/chat', 'ChatController@chat')->middleware(['auth'])->name('chat');
 
-Route::get('/user', function () {
-    return view('user');
-})->middleware(['auth'])->name('user');
+Route::get('/user', 'UserController@user')->middleware(['auth'])->name('user');
 
 require __DIR__.'/auth.php';
 

@@ -66,22 +66,25 @@ class ChatController extends Controller
         ]);
         $chat -> name = $request->input('name');
 
-        $request->validate([
-            'chat_picture' => ['required', 'image:jpg, jpeg, png', 'dimensions:min_width:300, min_height:300']
-        ]);
-        $image = \Image::make($request->file('chat_picture'));
-        $filename  = time() . $request->file('chat_picture')->getClientOriginalName();
+        if ($request->file('chat_picture'))
+        {
+            $request->validate([
+                'chat_picture' => ['required', 'image:jpg, jpeg, png', 'dimensions:min_width:300, min_height:300']
+            ]);
+            $image = \Image::make($request->file('chat_picture'));
+            $filename  = time() . $request->file('chat_picture')->getClientOriginalName();
+    
+            $path = 'images/Chats pictures/' . ((string) $filename);
+            $save_path = '/storage/' . $path;
+            $request->validate([
+                $save_path => ['string', 'max:255']
+            ]);
+            $chat -> chat_picture = $save_path;
 
-        $path = 'images/' . ((string) $filename);
-        $save_path = '/storage/' . $path;
-        $request->validate([
-            $save_path => ['string', 'max:255']
-        ]);
-        $chat -> chat_picture = $save_path;
-
-        $path = 'app/public/' . $path;
-        $image = \Image::make($image)->resize(300, 300);
-        $image->save(storage_path($path));
+            $path = 'app/public/' . $path;
+            $image = \Image::make($image)->resize(300, 300);
+            $image->save(storage_path($path));
+        }
 
         $chat -> creator_user_id = Auth::user()->id;
 
@@ -104,7 +107,8 @@ class ChatController extends Controller
         ->get();
         if (!$chat->isEmpty())
         {
-            Storage::delete(mb_substr($chat[0]->chat_picture, 9));
+            if($chat[0]->chat_picture != '/storage/images/Chats pictures/default_chat_picture.svg')
+                Storage::delete(mb_substr($chat[0]->chat_picture, 9));
             DB::table('chats')->where('id', '=', $current_chat_id)->delete();
         }
         return redirect()->route('chat_list');

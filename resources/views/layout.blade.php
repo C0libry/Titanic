@@ -19,11 +19,7 @@
                 <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
             </ul>
         </nav>
-        @if ( Auth::user()->profile_picture)
-            <li><a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
-        @else
-            <li><a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a></li>
-        @endif
+        <li><a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
         <form class="cta" method="POST" action="{{ route('logout') }}">
             @csrf
 

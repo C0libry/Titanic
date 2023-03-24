@@ -52,16 +52,15 @@ class UserController extends Controller
             $request->validate([
                 'profile_picture' => ['required', 'image:jpg, jpeg, png', 'dimensions:min_width:300, min_height:300']
             ]);
-            //$image = $request->file('profile_picture');
             $image = \Image::make($request->file('profile_picture'));
             $filename  = time() . $request->file('profile_picture')->getClientOriginalName();
 
-            $path = 'images/' . ((string) $filename);
+            $path = 'images/Users profile pictures/' . ((string) $filename);
             $save_path = '/storage/' . $path;
             $request->validate([
                 $save_path => ['string', 'max:255']
             ]);
-            if(Auth::user()->profile_picture !=null)
+            if(Auth::user()->profile_picture != '/storage/images/Users profile pictures/default_profile_picture.svg')
                 Storage::delete(mb_substr(Auth::user()->profile_picture, 9));
             $user -> profile_picture = $save_path;
 

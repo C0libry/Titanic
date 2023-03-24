@@ -3,65 +3,44 @@
 @section('head')
   <title>Chat</title>
   <link rel="stylesheet" href="{{ asset('css/chat.css') }}"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 @endsection
 
 @section('main_content')
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-
     <div class="container">
         <div class="row clearfix">
             <div class="col-lg-12">
                 <div class="card chat-app">
                     <div id="plist" class="people-list">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <button class="input-group-text" id = "search"><i class="fa fa-search"></i></button>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Search...">
-                        </div>
+                        @if($current_chat->creator_user_id == Auth::user()->id)
+                            <form class="input-group" method="POST" action="{{ route('add_user_to_chat', $current_chat->id) }}">
+                                @csrf
+                                <div class="input-group-prepend">
+                                    <button class="input-group-text"><ion-icon class="add_user" name="person-add-outline"></ion-icon></button>
+                                </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Add by username">
+                            </form>
+                            <a class="delet d-flex justify-content-center ml-4 btn btn-primary btn-lg" href="{{ route('delet_chat_user', Auth::user()->id) }}">Delet user</a>
+                        @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
-                            <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Vincent Porter</div>
-                                    <div class="status"> <i class="fa fa-circle offline"></i> left 7 mins ago </div>                                            
-                                </div>
-                            </li>
-                            <li class="clearfix active">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Aiden Chavez</div>
-                                    <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Mike Thomas</div>
-                                    <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                </div>
-                            </li>                                    
-                            <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Christian Kelly</div>
-                                    <div class="status"> <i class="fa fa-circle offline"></i> left 10 hours ago </div>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Monica Ward</div>
-                                    <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                </div>
-                            </li>
-                            <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Dean Henry</div>
-                                    <div class="status"> <i class="fa fa-circle offline"></i> offline since Oct 28 </div>
-                                </div>
-                            </li>
+                            @foreach($current_chat_users as $element)
+                                <li class="clearfix">
+                                    @if ($element->profile_picture)
+                                        <a href="{{ route('user') }}"><img class="" src = "{{$element->profile_picture}}" alt="avatar"></a>
+                                    @else
+                                        <a href="{{ route('user') }}"><ion-icon class="" name="person-circle-outline"></ion-icon></a>
+                                    @endif
+                                    <div class="about">
+                                        <div class="username">{{$element->username}}</div>
+                                        @if($element->is_online)
+                                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
+                                        @else
+                                            <div class="status"> <i class="fa fa-circle offline">
+                                            </i> {{$element->updated_at}} </div>
+                                        @endif
+                                    </div>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="chat">
@@ -69,11 +48,10 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                        <img src="{{ $current_chat->chat_picture }}" alt="avatar">
                                     </a>
                                     <div class="chat-about">
-                                        <h6 class="m-b-0">Aiden Chavez</h6>
-                                        <small>Last seen: 2 hours ago</small>
+                                        <h6 class="m-b-0">{{ $current_chat->name }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
@@ -86,53 +64,53 @@
                         </div>
                         <div class="chat-history">
                             <ul class="m-b-0">
-                                <li class="clearfix">
-                                    <div class="message-data text-right my-message-data">
-                                        <span class="message-data-time">10:10 AM, Today</span>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    </div>
-                                    <div class="message my-message float-right">
-                                        <div>Hi Aiden, how are you? How is the project coming along?</div>
-                                    </div>
-                                </li>
-                                <li class="clearfix">
-                                    <div class="message-data other-message-data">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                        <span class="message-data-time">10:12 AM, Today</span>
-                                    </div>
-                                    <div class="message other-message">Are we meeting today?</div>                                
-                                </li>                               
-                                <li class="clearfix">
-                                    <div class="message-data other-message-data">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                        <span class="message-data-time">10:15 AM, Today</span>
-                                    </div>
-                                    <div class="message other-message">Project has been already finished and I have results to show you.</div>
-                                </li>
-                                
-                                <li class="clearfix">
-                                    <div class="message-data text-right my-message-data">
-                                        <span class="message-data-time">10:16 AM, Today</span>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
-                                    </div>
-                                    <div class="message my-message float-right">
-                                        <i class="fa fa-circle unread"></i>
-                                        <div>Wele done! Project has been already all in finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show youProject has been already finished and I have results to show you</div>
-                                    </div>
-                                </li>
+                                @foreach($messages as $element)
+                                    @if (Auth::user()->id == $element->sender_user_id)
+                                        <li class="clearfix">
+                                            <div class="message-data text-right my-message-data">
+                                                <span class="message-data-time">{{ $element->created_at }}</span>
+                                                @if ( Auth::user()->profile_picture)
+                                                    <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a>
+                                                @else
+                                                    <a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a>
+                                                @endif
+                                            </div>
+                                            <div class="message my-message float-right">
+                                                @if ($element->is_read == false)
+                                                    <i class="fa fa-circle unread"></i>
+                                                @endif
+                                                <div>{{ $element->content }}</div>
+                                            </div>
+                                        </li>
+                                    @else
+                                        <li class="clearfix">
+                                            <div class="message-data other-message-data">
+                                                @if ( ($test = (\App\Models\User::find($element->sender_user_id)->profile_picture)) )
+                                                    <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ $test }}" alt="avatar"></a>
+                                                @else
+                                                    <a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a>
+                                                @endif
+                                                <span class="message-data-time">{{ $element->created_at }}</span>
+                                            </div>
+                                            <div class="message other-message">{{ $element->content }}</div>
+                                        </li>
+                                    @endif
+                                @endforeach
                             </ul>
                         </div>
-                        <div class="chat-message clearfix">
+                        <form class="chat-message clearfix" method="POST" action="{{ route('add_message', $current_chat->id) }}">
+                            @csrf
                             <div class="input-group mb-0">
                                 <div class="input-group-prepend">
-                                    <button class="input-group-text" id = "post"><i class="fa fa-send"></i></button>
+                                    <button class="input-group-text"><i class="fa fa-send"></i></button>
                                 </div>
-                                <input type="text" class="form-control" name="user_message" placeholder="Enter text here...">                                    
+                                <input type="text" class="form-control" name="user_message" placeholder="Enter text here...">
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="{{ asset('js/chat.js') }}"></script>
 @endsection

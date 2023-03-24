@@ -80,6 +80,7 @@ header {
 }
 
 .profile_picture {
+    fill: #0088a9;
     width: 45px;
     border-radius: 50%
 }
@@ -141,6 +142,10 @@ header {
 }
 
 .error {
+    color: #E1341E;
+}
+
+.delet {
     color: #E1341E;
 }
 

@@ -47,7 +47,7 @@ body{
     background: #efefef
 }
 
-.people-list .chat-list li .name {
+.people-list .chat-list li .username {
     font-size: 15px
 }
 
@@ -207,6 +207,15 @@ body{
     display: block;
     font-size: 1rem;
     padding: .375rem .75rem;
+}
+
+.chat_picture {
+    width: 45px;
+    border-radius: 50%
+}
+
+.add_user {
+    font-size: 1rem;
 }
 
 @media only screen and (max-width: 767px) {

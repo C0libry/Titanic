@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -14,7 +14,7 @@ class UserController extends Controller
         return view('user');
     }
 
-    public function edit_user_data()
+    public function edit_user_data_page()
     {
         return view('edit_user_data');
     }
@@ -47,14 +47,6 @@ class UserController extends Controller
             $user -> email = $request->input('email');
         }
 
-        if (Auth::user()->email != $request->input('email'))
-        {
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
-            ]);
-            $user -> email = $request->input('email');
-        }
-
         if ($request->file('profile_picture'))
         {
             $request->validate([
@@ -65,10 +57,13 @@ class UserController extends Controller
             $filename  = time() . $request->file('profile_picture')->getClientOriginalName();
 
             $path = 'images/' . ((string) $filename);
+            $save_path = '/storage/' . $path;
             $request->validate([
-                $path => ['string', 'max:255', 'unique:users']
+                $save_path => ['string', 'max:255']
             ]);
-            $user -> profile_picture = $path;
+            if(Auth::user()->profile_picture !=null)
+                Storage::delete(mb_substr(Auth::user()->profile_picture, 9));
+            $user -> profile_picture = $save_path;
 
             $path = 'app/public/' . $path;
             $image = \Image::make($image)->resize(300, 300);

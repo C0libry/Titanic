@@ -15,12 +15,12 @@
         <a class="logo" href="{{ route('home') }}"><ion-icon name="planet-outline" alt="logo"></ion-icon></a>
         <nav>
             <ul class="nav__links">
-                <li><a href="{{ route('chat') }}">Chat</a></li>
+                <li><a href="{{ route('chat_list') }}">Chat list</a></li>
                 <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
             </ul>
         </nav>
         @if ( Auth::user()->profile_picture)
-            <li><a href="{{ route('user') }}"><img class="profile_picture" src = "/storage/{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
+            <li><a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
         @else
             <li><a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a></li>
         @endif
@@ -37,7 +37,7 @@
     <div class="overlay">
         <a class="close"><ion-icon class="close" name="close-outline">&times;</ion-icon></a>
         <div class="overlay__content">
-            <a href="{{ route('chat') }}">Chat</a>
+            <a href="{{ route('chat_list') }}">Chat list</a>
             <a href="{{ route('user') }}">{{ Auth::user()->username }}</a>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf

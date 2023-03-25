@@ -28,6 +28,8 @@ Route::post('/chat/add_user_to_chat/{id}', 'ChatController@add_user_to_chat')->w
 
 Route::get('/chat/delete_chat/{id}', 'ChatController@delete_chat')->whereNumber('id')->middleware(['auth'])->name('delete_chat');
 
+Route::get('/chat/leave_chat/{id}', 'ChatController@leave_chat')->whereNumber('id')->middleware(['auth'])->name('leave_chat');
+
 Route::get('/chat/delet_chat_user/{id}', 'ChatController@delet_chat_user')->whereNumber('id')->middleware(['auth'])->name('delet_chat_user');
 
 Route::get('/user', 'UserController@user')->middleware(['auth'])->name('user');

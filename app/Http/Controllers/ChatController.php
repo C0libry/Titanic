@@ -114,6 +114,12 @@ class ChatController extends Controller
         return redirect()->route('chat_list');
     }
 
+    public function leave_chat($current_chat_id)
+    {
+        DB::table('chat_users')->where('user_id', '=', Auth::user()->id)->where('chat_id', '=', $current_chat_id)->delete();
+        return redirect()->route('chat_list');
+    }
+
     public function add_user_to_chat(Request $request, $current_chat_id)
     {
         $user = DB::table('users')

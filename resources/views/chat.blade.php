@@ -22,7 +22,6 @@
                                 </div>
                                 <input type="text" class="form-control" id="username" name="username" placeholder="Add by username">
                             </form>
-                            <a class="delet d-flex justify-content-center ml-4 btn btn-primary btn-lg" href="{{ route('delet_chat_user', Auth::user()->id) }}">Delet user</a>
                         @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
                             @foreach($current_chat_users as $element)
@@ -30,6 +29,7 @@
                                     <a href="{{ route('user') }}"><img class="" src = "{{$element->profile_picture}}" alt="avatar"></a>
                                     <div class="about">
                                         <div class="username">{{$element->username}}</div>
+                                        <ion-icon class="delete" name="close-circle-outline" href="{{ route('delet_chat_user', Auth::user()->id) }}"></ion-icon>
                                         @if($element->is_online)
                                             <div class="status"> <i class="fa fa-circle online"></i> online </div>
                                         @else

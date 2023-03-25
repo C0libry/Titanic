@@ -19,7 +19,7 @@
                 <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
             </ul>
         </nav>
-        <li><a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
+            <li><a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
         <form class="cta" method="POST" action="{{ route('logout') }}">
             @csrf
 

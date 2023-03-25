@@ -66,6 +66,11 @@ body{
     padding-left: 8px
 }
 
+.delete {
+    color: #E1341E;
+    width: 30px;
+}
+
 .people-list .status {
     color: #999;
     font-size: 13px

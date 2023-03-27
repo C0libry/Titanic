@@ -145,6 +145,31 @@ class ChatController extends Controller
         return ChatController::chat($current_chat_id);
     }
 
+    public function delete_user_from_chat(Request $request, $current_chat_id)
+    {
+        $user = DB::table('users')
+        ->where('users.username', '=', $request->username)
+        ->select('users.*')
+        ->get();
+        if(!$user->isEmpty())
+        {
+            $check = DB::table('chats')
+            ->where('chats.id', '=', $current_chat_id)
+            ->where('chats.creator_user_id', '=', $user[0]->id)
+            ->select('chats.*')
+            ->get();
+            //dd($check->isEmpty());
+            if($check->isEmpty())
+            {
+                DB::table('chat_users')
+                ->where('chat_users.chat_id', '=', $current_chat_id)
+                ->where('chat_users.user_id', '=', $user[0]->id)
+                ->delete();
+            }
+        }
+        return ChatController::chat($current_chat_id);
+    }
+
     public function delet_chat_user()
     {
         return redirect()->route('chat');

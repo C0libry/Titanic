@@ -9,7 +9,7 @@
 @section('main_content')
 <section class="vh-100" style="background-color: #eee;">
     <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-3">
+        <div class="col-lg-5">
             @if (!$chats->isEmpty())
                 <div class="card">
                     <div class="card-body">

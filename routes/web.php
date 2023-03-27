@@ -26,6 +26,8 @@ Route::post('/chat/{id}', 'ChatController@add_message')->whereNumber('id')->midd
 
 Route::post('/chat/add_user_to_chat/{id}', 'ChatController@add_user_to_chat')->whereNumber('id')->middleware(['auth'])->name('add_user_to_chat');
 
+Route::post('/chat/delete_user_from_chat/{id}', 'ChatController@delete_user_from_chat')->whereNumber('id')->middleware(['auth'])->name('delete_user_from_chat');
+
 Route::get('/chat/delete_chat/{id}', 'ChatController@delete_chat')->whereNumber('id')->middleware(['auth'])->name('delete_chat');
 
 Route::get('/chat/leave_chat/{id}', 'ChatController@leave_chat')->whereNumber('id')->middleware(['auth'])->name('leave_chat');

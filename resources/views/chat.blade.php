@@ -22,6 +22,14 @@
                                 </div>
                                 <input type="text" class="form-control" id="username" name="username" placeholder="Add by username">
                             </form>
+                            <br>
+                            <form class="input-group" method="POST" action="{{ route('delete_user_from_chat', $current_chat->id) }}">
+                                @csrf
+                                <div class="input-group-prepend">
+                                    <button class="input-group-text"><ion-icon class="add_user" name="close-circle-outline"></ion-icon></button>
+                                </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Add by username">
+                            </form>
                         @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
                             @foreach($current_chat_users as $element)
@@ -29,7 +37,6 @@
                                     <a href="{{ route('user') }}"><img class="" src = "{{$element->profile_picture}}" alt="avatar"></a>
                                     <div class="about">
                                         <div class="username">{{$element->username}}</div>
-                                        <ion-icon class="delete" name="close-circle-outline" href="{{ route('delet_chat_user', Auth::user()->id) }}"></ion-icon>
                                         @if($element->is_online)
                                             <div class="status"> <i class="fa fa-circle online"></i> online </div>
                                         @else

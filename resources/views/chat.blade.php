@@ -26,9 +26,9 @@
                             <form class="input-group" method="POST" action="{{ route('delete_user_from_chat', $current_chat->id) }}">
                                 @csrf
                                 <div class="input-group-prepend">
-                                    <button class="input-group-text"><ion-icon class="add_user" name="close-circle-outline"></ion-icon></button>
+                                    <button class="input-group-text"><ion-icon class="delete" name="close-circle-outline"></ion-icon></button>
                                 </div>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="Add by username">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Delete by username">
                             </form>
                         @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
@@ -55,15 +55,12 @@
                                     <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                         <img src="{{ $current_chat->chat_picture }}" alt="avatar">
                                     </a>
-                                    <div class="chat-about">
+                                    <div class="chat-about name">
                                         <h6 class="m-b-0">{{ $current_chat->name }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                                    <a href="" class="btn btn-outline-primary">Task manager</i></a>
                                 </div>
                             </div>
                         </div>
@@ -73,6 +70,12 @@
                                     @if (Auth::user()->id == $element->sender_user_id)
                                         <li class="clearfix">
                                             <div class="message-data text-right my-message-data">
+                                                <span class="username">
+                                                {{ DB::table('users')
+                                                    ->where('users.id', '=', $element->sender_user_id)
+                                                    ->select('users.username')
+                                                    ->get()[0]->username }}</span>
+                                                <br>
                                                 <span class="message-data-time">{{ $element->created_at }}</span>
                                                 <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a>
                                             </div>
@@ -86,6 +89,12 @@
                                     @else
                                         <li class="clearfix">
                                             <div class="message-data other-message-data">
+                                                <span class="username">
+                                                {{ DB::table('users')
+                                                    ->where('users.id', '=', $element->sender_user_id)
+                                                    ->select('users.username')
+                                                    ->get()[0]->username }}</span>
+                                                <br>
                                                 <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ (User::find($element->sender_user_id)->profile_picture) }}" alt="avatar"></a>
                                                 <span class="message-data-time">{{ $element->created_at }}</span>
                                             </div>

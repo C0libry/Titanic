@@ -18,6 +18,7 @@ Route::get('/chat_list', 'ChatController@chat_list')->middleware(['auth'])->name
 
 Route::get('/add_chat', 'ChatController@add_chat_page')->middleware(['auth'])->name('add_chat_page');
 
+
 Route::post('/chat_list', 'ChatController@add_chat')->middleware(['auth'])->name('add_chat');
 
 Route::get('/chat/{id}', 'ChatController@chat')->whereNumber('id')->middleware(['auth'])->name('chat');
@@ -33,6 +34,9 @@ Route::get('/chat/delete_chat/{id}', 'ChatController@delete_chat')->whereNumber(
 Route::get('/chat/leave_chat/{id}', 'ChatController@leave_chat')->whereNumber('id')->middleware(['auth'])->name('leave_chat');
 
 Route::get('/chat/delet_chat_user/{id}', 'ChatController@delet_chat_user')->whereNumber('id')->middleware(['auth'])->name('delet_chat_user');
+
+Route::get('/chat/task_manager/{id}', 'ChatController@task_manager')->whereNumber('id')->middleware(['auth'])->name('task_manager');
+
 
 Route::get('/user', 'UserController@user')->middleware(['auth'])->name('user');
 

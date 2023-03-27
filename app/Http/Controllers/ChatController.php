@@ -193,4 +193,9 @@ class ChatController extends Controller
     {
         DB::table('messages')->where('id', '=', $message_id)->delete();
     }
+
+    public function task_manager($current_chat_id)
+    {
+        return view('task_manager');
+    }
 }

@@ -1,4 +1,7 @@
-<?php use \App\Models\User; ?>
+<?php
+use \App\Models\User;
+use \App\Models\Message;
+?>
 
 @extends('layout')
 
@@ -52,7 +55,6 @@
                         <div class="chat-header clearfix">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                         <img src="{{ $current_chat->chat_picture }}" alt="avatar">
                                     </a>
                                     <div class="chat-about name">
@@ -60,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="" class="btn btn-outline-primary">Task manager</i></a>
+                                    <a href="{{ route('task_manager', $current_chat->id) }}" class="btn btn-outline-primary">Task manager</i></a>
                                 </div>
                             </div>
                         </div>
@@ -87,6 +89,13 @@
                                             </div>
                                         </li>
                                     @else
+                                        @if ($element->is_read == false)
+                                            <?php
+                                                $message = Message::find($element->id);
+                                                $message->is_read = true;
+                                                $message->update();
+                                            ?>
+                                        @endif
                                         <li class="clearfix">
                                             <div class="message-data other-message-data">
                                                 <span class="username">

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Models\ChatUser;
+use App\Models\TaskManager;
 
 class ChatController extends Controller
 {
@@ -196,6 +197,46 @@ class ChatController extends Controller
 
     public function task_manager($current_chat_id)
     {
-        return view('task_manager');
+        $access_check = DB::table('chat_users')
+        ->where('chat_users.chat_id', '=', $current_chat_id)
+        ->where('chat_users.user_id', '=', Auth::user()->id)
+        ->get();
+        if ($access_check->isEmpty())
+            return redirect()->route('chat_list');
+
+        $current_chat = DB::table('chats')
+        ->where('chats.id', '=', $current_chat_id)
+        ->select('chats.*')
+        ->get()[0];
+
+        $current_chat_users = DB::table('users')
+        ->join('chat_users', 'users.id', '=', 'chat_users.user_id')
+        ->where('chat_users.chat_id', '=', $current_chat_id)
+        ->select('users.username', 'users.profile_picture', 'users.is_online', 'users.updated_at')
+        ->get();
+
+        $tasks = DB::table('task_manager')->where('task_manager.chat_id', '=', $current_chat_id)->get();
+
+        return view('task_manager')
+        ->with('tasks', $tasks)
+        ->with('current_chat', $current_chat)
+        ->with('current_chat_users', $current_chat_users);
+    }
+
+    public function add_task_page($current_chat_id)
+    {
+        return view('add_task_page')
+        ->with('current_chat_id', $current_chat_id);
+    }
+
+    public function add_task(Request $request, $current_chat_id)
+    {
+        $task = new TaskManager();
+        $task->chat_id = $current_chat_id;
+        $task->task_to_user_id = $request->username;
+        $task->content = $request->Task;
+        $task->task_priority = $request->Priority;
+        $task->save();
+        return redirect()->route('task_manager', $current_chat_id);
     }
 }

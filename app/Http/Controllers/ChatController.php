@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Models\ChatUser;
 use App\Models\TaskManager;
+use Intervention\Image\Facades\Image;
 
 class ChatController extends Controller
 {
@@ -72,7 +74,7 @@ class ChatController extends Controller
             $request->validate([
                 'chat_picture' => ['required', 'image:jpg, jpeg, png', 'dimensions:min_width:300, min_height:300']
             ]);
-            $image = \Image::make($request->file('chat_picture'));
+            $image = Image::make($request->file('chat_picture'));
             $filename  = time() . $request->file('chat_picture')->getClientOriginalName();
     
             $path = 'images/Chats pictures/' . ((string) $filename);
@@ -83,7 +85,7 @@ class ChatController extends Controller
             $chat -> chat_picture = $save_path;
 
             $path = 'app/public/' . $path;
-            $image = \Image::make($image)->resize(300, 300);
+            $image = Image::make($image)->resize(300, 300);
             $image->save(storage_path($path));
         }
 
@@ -105,11 +107,11 @@ class ChatController extends Controller
         ->where('chats.id', '=', $current_chat_id)
         ->where('chats.creator_user_id', '=', Auth::user()->id)
         ->select('chats.*')
-        ->get();
-        if (!$chat->isEmpty())
+        ->first();
+        if ($chat!==null)
         {
-            if($chat[0]->chat_picture != '/storage/images/Chats pictures/default_chat_picture.svg')
-                Storage::delete(mb_substr($chat[0]->chat_picture, 9));
+            if($chat->chat_picture != '/storage/images/Chats pictures/default_chat_picture.svg')
+                Storage::delete(mb_substr($chat->chat_picture, 9));
             DB::table('chats')->where('id', '=', $current_chat_id)->delete();
         }
         return redirect()->route('chat_list');
@@ -123,15 +125,12 @@ class ChatController extends Controller
 
     public function add_user_to_chat(Request $request, $current_chat_id)
     {
-        $user = DB::table('users')
-        ->where('users.username', '=', $request->username)
-        ->select('users.*')
-        ->get();
-        if(!$user->isEmpty())
+        $user = User::find_by_username($request->username);
+        if($user!=null)
         {
             $check = DB::table('chat_users')
             ->where('chat_users.chat_id', '=', $current_chat_id)
-            ->where('chat_users.user_id', '=', $user[0]->id)
+            ->where('chat_users.user_id', '=', $user->id)
             ->select('chat_users.*')
             ->get();
             //dd($check->isEmpty());
@@ -139,7 +138,7 @@ class ChatController extends Controller
             {
                 $chat_user = new ChatUser();
                 $chat_user->chat_id = $current_chat_id;
-                $chat_user->user_id = $user[0]->id;
+                $chat_user->user_id = $user->id;
                 $chat_user->save();
             }
         }
@@ -148,15 +147,12 @@ class ChatController extends Controller
 
     public function delete_user_from_chat(Request $request, $current_chat_id)
     {
-        $user = DB::table('users')
-        ->where('users.username', '=', $request->username)
-        ->select('users.*')
-        ->get();
-        if(!$user->isEmpty())
+        $user = User::find_by_username($request->username);
+        if($user!==null)
         {
             $check = DB::table('chats')
             ->where('chats.id', '=', $current_chat_id)
-            ->where('chats.creator_user_id', '=', $user[0]->id)
+            ->where('chats.creator_user_id', '=', $user->id)
             ->select('chats.*')
             ->get();
             //dd($check->isEmpty());
@@ -164,7 +160,7 @@ class ChatController extends Controller
             {
                 DB::table('chat_users')
                 ->where('chat_users.chat_id', '=', $current_chat_id)
-                ->where('chat_users.user_id', '=', $user[0]->id)
+                ->where('chat_users.user_id', '=', $user->id)
                 ->delete();
             }
         }
@@ -207,7 +203,7 @@ class ChatController extends Controller
         $current_chat = DB::table('chats')
         ->where('chats.id', '=', $current_chat_id)
         ->select('chats.*')
-        ->get()[0];
+        ->first();
 
         $current_chat_users = DB::table('users')
         ->join('chat_users', 'users.id', '=', 'chat_users.user_id')
@@ -231,12 +227,33 @@ class ChatController extends Controller
 
     public function add_task(Request $request, $current_chat_id)
     {
-        $task = new TaskManager();
-        $task->chat_id = $current_chat_id;
-        $task->task_to_user_id = $request->username;
-        $task->content = $request->Task;
-        $task->task_priority = $request->Priority;
-        $task->save();
+        if ($user = DB::table('users')->where('users.username', '=', $request->username)->first())
+        {
+            $task = new TaskManager();
+            $task->chat_id = $current_chat_id;
+            $task->task_to_user_id = $user->id;
+            $task->content = $request->Task;
+            $task->task_priority = $request->Priority;
+            $task->save();
+        }
         return redirect()->route('task_manager', $current_chat_id);
+    }
+
+    public function done_task($current_task_id)
+    {
+        $current_task = TaskManager::find($current_task_id);
+        $current_chat = DB::table('chats')->where('id', '=', $current_task->chat_id)->first();
+        if($current_task->task_to_user_id == Auth::user()->id)
+            DB::table('task_manager')->where('id', '=', $current_task_id)->delete();
+        return redirect()->route('task_manager', $current_chat->id);
+    }
+
+    public function delete_task($current_task_id)
+    {
+        $current_task = TaskManager::find($current_task_id);
+        $current_chat = DB::table('chats')->where('id', '=', $current_task->chat_id)->first();
+        if($current_chat->creator_user_id == Auth::user()->id)
+            DB::table('task_manager')->where('id', '=', $current_task_id)->delete();
+        return redirect()->route('task_manager', $current_chat->id);
     }
 }

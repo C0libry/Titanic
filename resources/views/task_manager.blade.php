@@ -2,6 +2,7 @@
 
 @section('head')
   <title>Task manager</title>
+  <link rel="stylesheet" href="{{ asset('css/Task manager.css') }}"/>
 @endsection
 
 @section('main_content')
@@ -47,13 +48,26 @@
                         <span>{{$element->content}}</span>
                       </td>
                       <td class="align-middle">
-                        <h6 class="mb-0"><span class="badge bg-danger">{{$element->task_priority}}</span></h6>
+                        @switch ($element->task_priority)
+                          @case('High priority')
+                            <h6 class="mb-0"><span class="badge bg-danger">{{$element->task_priority}}</span></h6>
+                            @break
+                          @case('Middle priority')
+                            <h6 class="mb-0"><span class="badge bg-warning">{{$element->task_priority}}</span></h6>
+                            @break
+                          @case('Low priority')
+                            <h6 class="mb-0"><span class="badge bg-success">{{$element->task_priority}}</span></h6>
+                            @break
+                          @default
+                        @endswitch
                       </td>
                       <td class="align-middle">
                         @if($current_chat->creator_user_id == Auth::user()->id)
-                        <a href="#!" data-mdb-toggle="tooltip" title="Done"><ion-icon name="checkmark-done-outline"></ion-icon></a>
+                          <a href="{{ route('delete_task', $element->id) }}" data-mdb-toggle="tooltip" title="Remove" class="icon delete"> <ion-icon name="trash-outline"></ion-icon> </a>
                         @else
-                        <a href="#!" data-mdb-toggle="tooltip" title="Remove"> <ion-icon name="trash-outline"></ion-icon> </a>
+                          @if($element->task_to_user_id == Auth::user()->id)
+                            <a href="{{ route('done_task', $element->id) }}" data-mdb-toggle="tooltip" title="Done" class="icon"><ion-icon name="checkmark-done-outline"></ion-icon></a>
+                          @endif
                         @endif
                       </td>
                     </tr>

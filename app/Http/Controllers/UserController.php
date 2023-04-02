@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -52,7 +53,7 @@ class UserController extends Controller
             $request->validate([
                 'profile_picture' => ['required', 'image:jpg, jpeg, png', 'dimensions:min_width:300, min_height:300']
             ]);
-            $image = \Image::make($request->file('profile_picture'));
+            $image = Image::make($request->file('profile_picture'));
             $filename  = time() . $request->file('profile_picture')->getClientOriginalName();
 
             $path = 'images/Users profile pictures/' . ((string) $filename);
@@ -65,7 +66,7 @@ class UserController extends Controller
             $user -> profile_picture = $save_path;
 
             $path = 'app/public/' . $path;
-            $image = \Image::make($image)->resize(300, 300);
+            $image = Image::make($image)->resize(300, 300);
             $image->save(storage_path($path));
         }
         $user->save();

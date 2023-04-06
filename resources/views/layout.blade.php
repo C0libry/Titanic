@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     @yield('head')
 </head>
-<body> 
+<body>
     @if (Auth::check())
     <header>
         <a class="logo" href="{{ route('home') }}"><ion-icon name="planet-outline" alt="logo"></ion-icon></a>
@@ -19,11 +19,7 @@
                 <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
             </ul>
         </nav>
-        @if ( Auth::user()->profile_picture)
             <li><a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a></li>
-        @else
-            <li><a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a></li>
-        @endif
         <form class="cta" method="POST" action="{{ route('logout') }}">
             @csrf
 

@@ -1,3 +1,8 @@
+<?php
+use \App\Models\User;
+use \App\Models\Message;
+?>
+
 @extends('layout')
 
 @section('head')
@@ -20,16 +25,19 @@
                                 </div>
                                 <input type="text" class="form-control" id="username" name="username" placeholder="Add by username">
                             </form>
-                            <a class="delet d-flex justify-content-center ml-4 btn btn-primary btn-lg" href="{{ route('delet_chat_user', Auth::user()->id) }}">Delet user</a>
+                            <br>
+                            <form class="input-group" method="POST" action="{{ route('delete_user_from_chat', $current_chat->id) }}">
+                                @csrf
+                                <div class="input-group-prepend">
+                                    <button class="input-group-text"><ion-icon class="delete" name="close-circle-outline"></ion-icon></button>
+                                </div>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Delete by username">
+                            </form>
                         @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
                             @foreach($current_chat_users as $element)
                                 <li class="clearfix">
-                                    @if ($element->profile_picture)
-                                        <a href="{{ route('user') }}"><img class="" src = "{{$element->profile_picture}}" alt="avatar"></a>
-                                    @else
-                                        <a href="{{ route('user') }}"><ion-icon class="" name="person-circle-outline"></ion-icon></a>
-                                    @endif
+                                    <a href="{{ route('user') }}"><img class="" src = "{{$element->profile_picture}}" alt="avatar"></a>
                                     <div class="about">
                                         <div class="username">{{$element->username}}</div>
                                         @if($element->is_online)
@@ -47,18 +55,14 @@
                         <div class="chat-header clearfix">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
                                         <img src="{{ $current_chat->chat_picture }}" alt="avatar">
                                     </a>
-                                    <div class="chat-about">
+                                    <div class="chat-about name">
                                         <h6 class="m-b-0">{{ $current_chat->name }}</h6>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                                    <a href="{{ route('task_manager', $current_chat->id) }}" class="btn btn-outline-primary">Task manager</i></a>
                                 </div>
                             </div>
                         </div>
@@ -68,12 +72,14 @@
                                     @if (Auth::user()->id == $element->sender_user_id)
                                         <li class="clearfix">
                                             <div class="message-data text-right my-message-data">
+                                                <span class="username">
+                                                {{ DB::table('users')
+                                                    ->where('users.id', '=', $element->sender_user_id)
+                                                    ->select('users.username')
+                                                    ->get()[0]->username }}</span>
+                                                <br>
                                                 <span class="message-data-time">{{ $element->created_at }}</span>
-                                                @if ( Auth::user()->profile_picture)
-                                                    <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a>
-                                                @else
-                                                    <a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a>
-                                                @endif
+                                                <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ Auth::user()->profile_picture }}" alt="avatar"></a>
                                             </div>
                                             <div class="message my-message float-right">
                                                 @if ($element->is_read == false)
@@ -83,13 +89,22 @@
                                             </div>
                                         </li>
                                     @else
+                                        @if ($element->is_read == false)
+                                            <?php
+                                                $message = Message::find($element->id);
+                                                $message->is_read = true;
+                                                $message->update();
+                                            ?>
+                                        @endif
                                         <li class="clearfix">
                                             <div class="message-data other-message-data">
-                                                @if ( ($test = (\App\Models\User::find($element->sender_user_id)->profile_picture)) )
-                                                    <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ $test }}" alt="avatar"></a>
-                                                @else
-                                                    <a href="{{ route('user') }}"><ion-icon class="profile_picture" name="person-circle-outline"></ion-icon></a>
-                                                @endif
+                                                <span class="username">
+                                                {{ DB::table('users')
+                                                    ->where('users.id', '=', $element->sender_user_id)
+                                                    ->select('users.username')
+                                                    ->get()[0]->username }}</span>
+                                                <br>
+                                                <a href="{{ route('user') }}"><img class="profile_picture" src = "{{ (User::find($element->sender_user_id)->profile_picture) }}" alt="avatar"></a>
                                                 <span class="message-data-time">{{ $element->created_at }}</span>
                                             </div>
                                             <div class="message other-message">{{ $element->content }}</div>

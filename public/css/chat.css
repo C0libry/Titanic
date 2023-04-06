@@ -66,6 +66,17 @@ body{
     padding-left: 8px
 }
 
+.delete {
+    font-size: 1rem;
+    color: #E1341E;
+}
+
+.username
+{
+    padding: 5px;
+    color: #24252a;
+}
+
 .people-list .status {
     color: #999;
     font-size: 13px

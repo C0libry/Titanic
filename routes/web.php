@@ -2,18 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-Route::get('/', 'MainController@home')-> name('home');
-
+Route::get('/', 'MainController@home')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/chat_list', 'ChatController@chat_list')->name('chat_list');
@@ -48,11 +37,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete_task/{task_id}', 'ChatController@delete_task')->whereNumber('task_id')->name('delete_task');
     });
 
-    Route::get('/user', 'UserController@user')->name('user');
+    Route::prefix('user')->group(function () {
+        Route::get('/', 'UserController@user')->name('user');
 
-    Route::get('/user/{id}/edit', 'UserController@edit_user_data_page')->whereNumber('id')->name('edit_user_data_page');
+        Route::get('/{id}/edit', 'UserController@edit_user_data_page')->whereNumber('id')->name('edit_user_data_page');
 
-    Route::post('/user/{id}/edit', 'UserController@update_user_data')->whereNumber('id')->name('update_user_data');
+        Route::post('/{id}/edit', 'UserController@update_user_data')->whereNumber('id')->name('update_user_data');
+    });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

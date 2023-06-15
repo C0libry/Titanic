@@ -76,16 +76,12 @@ class ChatController extends Controller
             $image = Image::make($request->file('chat_picture'));
             $filename  = time() . $request->file('chat_picture')->getClientOriginalName();
 
-            $path = 'images/Chats pictures/' . ((string) $filename);
-            $save_path = '/storage/' . $path;
-            $request->validate([
-                $save_path => ['string', 'max:255']
-            ]);
-            $chat->chat_picture = $save_path;
+            $name = (string) $filename;
 
-            $path = 'app/public/' . $path;
+            $path = 'uploads/public/images/Chats pictures/' . $name;
             $image = Image::make($image)->resize(300, 300);
-            $image->save(storage_path($path));
+            $image->save($path);
+            $chat->chat_picture = '/' . $path;
         }
 
         $chat->creator_user_id = Auth::user()->id;
@@ -108,8 +104,8 @@ class ChatController extends Controller
             ->select('chats.*')
             ->first();
         if ($chat !== null) {
-            if ($chat->chat_picture != '/storage/images/Chats pictures/default_chat_picture.svg')
-                Storage::delete(mb_substr($chat->chat_picture, 9));
+            if ($chat->chat_picture != '/uploads/public/images/Chats pictures/default_chat_picture.svg')
+                Storage::disk('public_uploads')->delete(mb_substr($chat->chat_picture, 9));
             DB::table('chats')->where('id', '=', $current_chat_id)->delete();
         }
         return redirect()->route('chat_list');

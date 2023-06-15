@@ -1,8 +1,7 @@
-<?php
-
+@php
 use App\Models\User;
 use App\Models\Message;
-?>
+@endphp
 
 @extends('layout')
 

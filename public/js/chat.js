@@ -41,6 +41,9 @@ let href = window.location.pathname;
 let form = document.getElementById('chatForm');
 form.addEventListener('submit', sub);
 
+let btn = document.getElementById("show_menu");
+btn.addEventListener("click", show_menu);
+
 function sub(event) {
     event.preventDefault();
 
@@ -67,4 +70,14 @@ function sleep(millis) {
     while (((new Date()).getTime() - t) < millis) {
         i++;
     }
+}
+
+function show_menu() {
+    let plist = document.getElementById("plist");
+    if (plist.getAttribute('class') == 'people-list-open')
+        plist.className = 'people-list';
+    else
+        plist.className = 'people-list-open';
+        2
+    // console.log(plist.getAttribute('class'));
 }

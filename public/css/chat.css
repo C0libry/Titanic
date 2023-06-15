@@ -1,6 +1,7 @@
-body{
+body {
     background-color: #f4f7f6;
 }
+
 .card {
     background: #fff;
     transition: .5s;
@@ -11,6 +12,7 @@ body{
     width: 100%;
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
 }
+
 .chat-app .people-list {
     width: 280px;
     position: absolute;
@@ -71,8 +73,7 @@ body{
     color: #E1341E;
 }
 
-.username
-{
+.username {
     padding: 5px;
     color: #24252a;
 }
@@ -233,33 +234,56 @@ body{
     height: 480px;
     overflow-x: auto
 }
+
 .chat-app .chat-history {
     height: calc(100vh - 350px);
     overflow-x: auto
 }
 
+#show_menu {
+    display: none;
+}
+
 @media only screen and (max-width: 767px) {
+
     .chat-app .people-list {
-        height: 465px;
+        height: calc(100vh - 200px);
+        min-height: 200px;
         width: 100%;
         overflow-x: auto;
         background: #fff;
-        left: -400px;
-        display: none
+        display: none;
     }
+
+    .people-list-open {
+        height: calc(100vh - 200px);
+        min-height: 200px;
+        width: 100%;
+        overflow-x: auto;
+        background: #fff;
+        display: block;
+    }
+
     .chat-app .people-list.open {
         left: 0
     }
+
     .chat-app .chat {
         margin: 0
     }
+
     .chat-app .chat .chat-header {
         border-radius: 0.55rem 0.55rem 0 0
     }
+
     .chat-app .chat-history {
         height: calc(100vh - 400px);
         min-height: 200px;
         overflow-x: auto
+    }
+
+    #show_menu {
+        display: block;
     }
 }
 
@@ -268,6 +292,7 @@ body{
         height: 650px;
         overflow-x: auto
     }
+
     .chat-app .chat-history {
         height: calc(100vh - 400px);
         overflow-x: auto
@@ -279,6 +304,7 @@ body{
         height: 480px;
         overflow-x: auto
     }
+
     .chat-app .chat-history {
         height: calc(100vh - 350px);
         overflow-x: auto

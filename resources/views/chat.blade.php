@@ -17,6 +17,7 @@ use App\Models\Message;
     <div class="container">
         <div class="row clearfix">
             <div class="col-lg-12">
+                <button class="btn btn-outline-primary" id="show_menu">Side menu</i></button>
                 <div class="card chat-app">
                     <div id="plist" class="people-list">
                         @if ($current_chat->creator_user_id == Auth::user()->id)

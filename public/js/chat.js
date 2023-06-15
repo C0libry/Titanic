@@ -6,17 +6,16 @@ socket.onopen = function () {
 
 socket.onclose = function (event) {
     if (event.wasClean) {
-        alert('Соединение закрыто чисто');
+        console.log('Соединение закрыто чисто');
     }
     else {
-        alert('Обрыв соединения');
+        console.log('Обрыв соединения');
     }
-    alert('Код: ' + event.code + ' причина: ' + event.reason);
+    console.log('Код: ' + event.code + ' причина: ' + event.reason);
 };
 
 socket.onmessage = function (event) {
     //alert("Получены данные " + event.data);
-    sleep(100); // Задержка, чтобы данные в базе данных успели обновится
     let requestURL = href;
     let request = new XMLHttpRequest();
 
@@ -33,7 +32,7 @@ socket.onmessage = function (event) {
 };
 
 socket.onerror = function (error) {
-    alert("Ошибка " + error.message);
+    console.log("Ошибка " + error.message);
 };
 
 
@@ -56,10 +55,9 @@ function sub(event) {
         elem = elem.getElementsByClassName('chat-history')[0];
         chat_history.parentNode.replaceChild(elem, chat_history);
         chat_history = document.querySelector('.chat-history');
+        socket.send(formData.get('user_message'));
     }
     request.send(formData);
-    // addMyMessage(formData.get('user_message'));
-    socket.send(formData.get('user_message'));
     event.target.reset();
 }
 

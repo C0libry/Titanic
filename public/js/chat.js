@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://192.168.1.42:8080");
+let socket = new WebSocket("ws://172.22.28.63:8080");
 
 socket.onopen = function () {
     console.log("Соединение установлено.");
@@ -78,6 +78,5 @@ function show_menu() {
         plist.className = 'people-list';
     else
         plist.className = 'people-list-open';
-        2
     // console.log(plist.getAttribute('class'));
 }

@@ -38,7 +38,7 @@
                     </div>
                 @endif
                 <a class="d-flex justify-content-center ml-4 btn btn-primary btn-lg"
-                    href="{{ route('add_chat_page') }}">Create chat</a>
+                    href="{{ route('add_chat_page') }}">{{ __('chat_list.Create chat') }}</a>
             </div>
         </div>
     </section>

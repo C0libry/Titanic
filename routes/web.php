@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'MainController@home')->name('home');
 
+Route::get('/locale', 'LocaleController@locale')->name('locale');
+
 Route::middleware('auth')->group(function () {
     Route::get('/chat_list', 'ChatController@chat_list')->name('chat_list');
 

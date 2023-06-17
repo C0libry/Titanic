@@ -13,6 +13,8 @@ use App\Models\ChatUser;
 use App\Models\TaskManager;
 use Intervention\Image\Facades\Image;
 
+use Illuminate\Support\Facades\App;
+
 class ChatController extends Controller
 {
     public function chat($current_chat_id)
@@ -50,7 +52,6 @@ class ChatController extends Controller
             ->where('chat_users.user_id', '=', Auth::user()->id)
             ->select('chats.*')
             ->get();
-        // dd($chats);
         // DB::table('chats')->where('chats.id', '=', 19)->select('chats.chat_picture')->get()[0]->chat_picture;
         return view('chat_list', ['chats' => $chats]);
     }

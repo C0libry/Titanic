@@ -21,8 +21,9 @@
             </a>
             <nav>
                 <ul class="nav__links">
-                    <li><a href="{{ route('chat_list') }}">Chat list</a></li>
+                    <li><a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a></li>
                     <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
+                    <li><a href="{{ route('locale') }}">{{ __('menu.locale') }}</a></li>
                 </ul>
             </nav>
             <li><a href="{{ route('user') }}"><img class="profile_picture" src="{{ Auth::user()->profile_picture }}"
@@ -32,10 +33,10 @@
 
                 <x-responsive-nav-link class="logout" :href="route('logout')"
                     onclick="event.preventDefault(); this.closest('form').submit();">
-                    {{ __('Log Out') }}
+                    {{ __('menu.Log Out') }}
                 </x-responsive-nav-link>
             </form>
-            <p class="menu cta">Menu</p>
+            <p class="menu cta">{{ __('menu.Menu') }}</p>
         </header>
 
         <div class="overlay">
@@ -43,14 +44,15 @@
                 <ion-icon class="close" name="close-outline">&times;</ion-icon>
             </a>
             <div class="overlay__content">
-                <a href="{{ route('chat_list') }}">Chat list</a>
+                <a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a>
                 <a href="{{ route('user') }}">{{ Auth::user()->username }}</a>
+                <li><a href="{{ route('locale') }}">{{ __('menu.locale') }}</a></li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
                         onclick="event.preventDefault(); this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        {{ __('menu.Log Out') }}
                     </x-responsive-nav-link>
                 </form>
             </div>
@@ -62,11 +64,12 @@
             </a>
             <nav>
                 <ul class="nav__links">
-                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('login') }}">{{ __('menu.Login') }}</a></li>
+                    <li><a href="{{ route('locale') }}">{{ __('menu.locale') }}</a></li>
                 </ul>
             </nav>
-            <a class="cta" href="{{ route('register') }}">Signup</a>
-            <p class="menu cta">Menu</p>
+            <a class="cta" href="{{ route('register') }}">{{ __('menu.Signup') }}</a>
+            <p class="menu cta">{{ __('menu.Menu') }}</p>
         </header>
 
         <div class="overlay">
@@ -74,8 +77,8 @@
                 <ion-icon class="close" name="close-outline">&times;</ion-icon>
             </a>
             <div class="overlay__content">
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Signup</a>
+                <a href="{{ route('login') }}">{{ __('menu.Login') }}</a>
+                <a href="{{ route('register') }}">{{ __('menu.Signup') }}</a>
             </div>
         </div>
     @endif

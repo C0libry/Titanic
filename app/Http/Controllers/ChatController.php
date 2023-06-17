@@ -93,7 +93,7 @@ class ChatController extends Controller
         $chat_user->user_id = Auth::user()->id;
         $chat_user->save();
 
-        return ChatController::chat_list();
+        return redirect()->route('chat_list');
     }
 
     public function delete_chat($current_chat_id)
@@ -134,7 +134,7 @@ class ChatController extends Controller
                 $chat_user->save();
             }
         }
-        return ChatController::chat($current_chat_id);
+        return redirect()->route('chat', $current_chat_id);
     }
 
     public function delete_user_from_chat(Request $request, $current_chat_id)
@@ -154,7 +154,7 @@ class ChatController extends Controller
                     ->delete();
             }
         }
-        return ChatController::chat($current_chat_id);
+        return redirect()->route('chat', $current_chat_id);
     }
 
     public function delet_chat_user()

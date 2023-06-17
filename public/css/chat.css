@@ -53,7 +53,7 @@ body {
     font-size: 15px
 }
 
-.people-list .chat-list img {
+img {
     width: 45px;
     border-radius: 50%
 }
@@ -237,6 +237,7 @@ body {
 
 .chat-app .chat-history {
     height: calc(100vh - 350px);
+    min-height: 200px;
     overflow-x: auto
 }
 
@@ -284,7 +285,7 @@ body {
 
     #show_menu {
         display: block;
-    }
+    } 
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -295,6 +296,7 @@ body {
 
     .chat-app .chat-history {
         height: calc(100vh - 400px);
+        min-height: 200px;
         overflow-x: auto
     }
 }
@@ -307,6 +309,7 @@ body {
 
     .chat-app .chat-history {
         height: calc(100vh - 350px);
+        min-height: 200px;
         overflow-x: auto
     }
 }

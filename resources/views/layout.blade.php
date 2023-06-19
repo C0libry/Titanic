@@ -44,9 +44,9 @@
                 <ion-icon class="close" name="close-outline">&times;</ion-icon>
             </a>
             <div class="overlay__content">
+                <a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a>
                 <a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a>
                 <a href="{{ route('user') }}">{{ Auth::user()->username }}</a>
-                <li><a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a></li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
@@ -77,6 +77,7 @@
                 <ion-icon class="close" name="close-outline">&times;</ion-icon>
             </a>
             <div class="overlay__content">
+                <a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a>
                 <a href="{{ route('login') }}">{{ __('menu.Login') }}</a>
                 <a href="{{ route('register') }}">{{ __('menu.Signup') }}</a>
             </div>

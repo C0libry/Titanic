@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 return [
-
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'Неправильный пароль.',
-    'throttle' => 'Слишком много запросов. Повторите попытку через :seconds seconds.',
-
+    'failed'   => 'Неверное имя пользователя или пароль.',
+    'password' => 'Некорректный пароль.',
+    'throttle' => 'Слишком много попыток входа. Пожалуйста, попробуйте ещё раз через :seconds секунд.',
 ];

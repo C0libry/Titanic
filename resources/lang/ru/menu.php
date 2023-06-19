@@ -2,7 +2,8 @@
 
 return [
 
-    'locale' => 'RU',
+    'locale' => 'ru',
+    'set_locale' => 'en',
     'Chat list' => 'Чаты',
     'Login' => 'Вход',
     'Signup' => 'Регистрация',

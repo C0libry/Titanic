@@ -23,7 +23,7 @@
                 <ul class="nav__links">
                     <li><a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a></li>
                     <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
-                    <li><a href="{{ route('locale') }}">{{ __('menu.locale') }}</a></li>
+                    <li><a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a></li>
                 </ul>
             </nav>
             <li><a href="{{ route('user') }}"><img class="profile_picture" src="{{ Auth::user()->profile_picture }}"
@@ -46,7 +46,7 @@
             <div class="overlay__content">
                 <a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a>
                 <a href="{{ route('user') }}">{{ Auth::user()->username }}</a>
-                <li><a href="{{ route('locale') }}">{{ __('menu.locale') }}</a></li>
+                <li><a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a></li>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
@@ -65,7 +65,7 @@
             <nav>
                 <ul class="nav__links">
                     <li><a href="{{ route('login') }}">{{ __('menu.Login') }}</a></li>
-                    <li><a href="{{ route('locale') }}">{{ __('menu.locale') }}</a></li>
+                    <li><a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a></li>
                 </ul>
             </nav>
             <a class="cta" href="{{ route('register') }}">{{ __('menu.Signup') }}</a>

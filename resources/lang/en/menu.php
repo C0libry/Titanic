@@ -2,7 +2,8 @@
 
 return [
 
-    'locale' => 'EN',
+    'locale' => 'en',
+    'set_locale' => 'ru',
     'Chat list' => 'Chat list',
     'Login' => 'Login',
     'Signup' => 'Signup',

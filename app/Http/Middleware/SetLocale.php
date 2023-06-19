@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
-class LocaleMiddlewar
+class SetLocale
 {
     /**
      * Handle an incoming request.
@@ -17,13 +17,11 @@ class LocaleMiddlewar
      */
     public function handle(Request $request, Closure $next)
     {
+        // dump(session('locale'));
         if (session('locale'))
             App::setLocale(session('locale'));
-        else {
+        else
             App::setLocale('en');
-            session(['locale' => 'en']);
-        }
-        // dump(session('locale'));
         return $next($request);
     }
 }

@@ -77,8 +77,7 @@
                                         </div>
 
                                         <div class="form-check d-flex justify-content-center mb-5">
-                                            <input class="form-check-input me-2" type="checkbox" value=""
-                                                id="form2Example3c" />
+                                            <input class="form-check-input me-2" id="agreement" name="agreement" type="checkbox" value="1" />
                                             <label class="form-check-label">
                                                 {{ __('register.I agree all statements in') }} <a
                                                     href="#!">{{ __('register.Terms of service') }}</a>

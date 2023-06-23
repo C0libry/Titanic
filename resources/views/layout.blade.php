@@ -68,7 +68,7 @@
                     <li><a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a></li>
                 </ul>
             </nav>
-            <a class="cta" href="{{ route('register') }}">{{ __('menu.Signup') }}</a>
+            <a class="cta" href="{{ route('register') }}">{{ __('menu.Sign Up') }}</a>
             <p class="menu cta">{{ __('menu.Menu') }}</p>
         </header>
 
@@ -79,7 +79,7 @@
             <div class="overlay__content">
                 <a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a>
                 <a href="{{ route('login') }}">{{ __('menu.Login') }}</a>
-                <a href="{{ route('register') }}">{{ __('menu.Signup') }}</a>
+                <a href="{{ route('register') }}">{{ __('menu.Sign Up') }}</a>
             </div>
         </div>
     @endif

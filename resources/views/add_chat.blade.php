@@ -14,7 +14,8 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create chat</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                                        {{ __('add_chat.Create chat') }}</p>
 
                                     <!-- Validation Errors -->
                                     <x-auth-validation-errors class="mb-4 error" :errors="$errors" />
@@ -28,7 +29,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="name" class="form-control block mt-1 w-full" type="text"
                                                     name="name" :value="old('name')" required autofocus />
-                                                <label class="form-label">Your chat name</label>
+                                                <label class="form-label">{{ __('add_chat.Сhat name') }}</label>
                                             </div>
                                         </div>
 
@@ -37,14 +38,14 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input type="file" class="form-control block mt-1 w-full"
                                                     id="chat_picture" name="chat_picture">
-                                                <label class="form-label">Your chat picture</label>
+                                                <label class="form-label">{{ __('add_chat.Сhat picture') }}</label>
                                             </div>
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                             <div class="flex items-center justify-end mt-4">
                                                 <button class="ml-4 btn btn-primary btn-lg">
-                                                    Create chat
+                                                    {{ __('add_chat.Create chat') }}
                                                 </button>
                                             </div>
                                         </div>

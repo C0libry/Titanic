@@ -13,17 +13,17 @@
 
                     <div class="card">
                         <div class="card-header p-3">
-                            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>Task List</h5>
+                            <h5 class="mb-0"><i class="fas fa-tasks me-2"></i>{{ __('task_manager.Task List') }}</h5>
                         </div>
                         <div class="card-body" data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px">
 
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Team Member</th>
-                                        <th scope="col">Task</th>
-                                        <th scope="col">Priority</th>
-                                        <th scope="col">Actions</th>
+                                        <th scope="col">{{ __('task_manager.Team Member') }}</th>
+                                        <th scope="col">{{ __('task_manager.Task') }}</th>
+                                        <th scope="col">{{ __('task_manager.Priority') }}</th>
+                                        <th scope="col">{{ __('task_manager.Actions') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +83,7 @@
                         </div>
                         <div class="card-footer text-end p-3">
                             <!-- <button class="me-2 btn btn-link">Cancel</button> -->
-                            <a href="{{ route('add_task_page', $current_chat->id) }}" class="btn btn-primary">Add Task</a>
+                            <a href="{{ route('add_task_page', $current_chat->id) }}" class="btn btn-primary">{{ __('task_manager.Add Task') }}</a>
                         </div>
                     </div>
 

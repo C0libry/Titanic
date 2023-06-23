@@ -1,6 +1,6 @@
 @php
-use App\Models\User;
-use App\Models\Message;
+    use App\Models\User;
+    use App\Models\Message;
 @endphp
 
 @extends('layout')
@@ -16,7 +16,7 @@ use App\Models\Message;
     <div class="container">
         <div class="row clearfix">
             <div class="col-lg-12">
-                <button class="btn btn-outline-primary" id="show_menu">Side menu</i></button>
+                <button class="btn btn-outline-primary" id="show_menu">{{ __('chat.Side menu') }}</i></button>
                 <div class="card chat-app">
                     <div id="plist" class="people-list">
                         @if ($current_chat->creator_user_id == Auth::user()->id)
@@ -29,7 +29,7 @@ use App\Models\Message;
                                     </button>
                                 </div>
                                 <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Add by username">
+                                    placeholder="{{ __('chat.Add by username') }}">
                             </form>
                             <br>
                             <form class="input-group" method="POST"
@@ -41,7 +41,7 @@ use App\Models\Message;
                                     </button>
                                 </div>
                                 <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Delete by username">
+                                    placeholder="{{ __('chat.Delete by username') }}">
                             </form>
                         @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
@@ -52,7 +52,7 @@ use App\Models\Message;
                                     <div class="about">
                                         <div class="username">{{ $element->username }}</div>
                                         @if ($element->is_online)
-                                            <div class="status"> <i class="fa fa-circle online"></i> online </div>
+                                            <div class="status"> <i class="fa fa-circle online"></i> {{ __('user.online') }} </div>
                                         @else
                                             <div class="status"> <i class="fa fa-circle offline">
                                                 </i> {{ $element->updated_at }} </div>
@@ -74,7 +74,7 @@ use App\Models\Message;
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
                                     <a href="{{ route('task_manager', $current_chat->id) }}"
-                                        class="btn btn-outline-primary">Task manager</i></a>
+                                        class="btn btn-outline-primary">{{ __('task_manager.Task manager') }}</i></a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@ use App\Models\Message;
                                     <button class="input-group-text"><i class="fa fa-send"></i></button>
                                 </div>
                                 <input type="text" class="form-control" name="user_message"
-                                    placeholder="Enter text here...">
+                                    placeholder="{{ __('chat.Enter text here...') }}">
                             </div>
                         </form>
                     </div>

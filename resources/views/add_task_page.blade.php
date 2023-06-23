@@ -14,7 +14,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Create Task</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{ __('task_manager.Create Task') }}</p>
 
                                     <!-- Validation Errors -->
                                     <x-auth-validation-errors class="mb-4 error" :errors="$errors" />
@@ -29,7 +29,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="username" class="form-control block mt-1 w-full" type="text"
                                                     name="username" :value="old('username')" required autofocus />
-                                                <label class="form-label">Team Member Username</label>
+                                                <label class="form-label">{{ __('task_manager.Team Member Username') }}</label>
                                             </div>
                                         </div>
 
@@ -38,35 +38,24 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="Task" class="form-control block mt-1 w-full" type="text"
                                                     name="Task" :value="old('Task')" required autofocus />
-                                                <label class="form-label">Task</label>
+                                                <label class="form-label">{{ __('task_manager.Task') }}</label>
                                             </div>
                                         </div>
 
-                                        <!-- <div class="d-flex flex-row align-items-center mb-4">
-                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                            <div class="form-outline flex-fill mb-0">
-                                <input id="Priority" class="form-control block mt-1 w-full" type="text" name="Priority" :value="old('Priority')" required autofocus />
-                                <label class="form-label">Priority</label>
-                            </div>
-                            </div> -->
-
                                         <div class="d-flex flex-row align-items-center mb-4">
-                                            <label for="country" class="form-label">Priority</label>
+                                            <label for="country" class="form-label">{{ __('task_manager.Priority') }}</label>
                                             <select class="form-select" id="Priority" name="Priority" required="">
-                                                <option value="">Choose...</option>
+                                                <option value="">{{ __('task_manager.Choose...') }}</option>
                                                 <option value="High priority">High priority</option>
                                                 <option value="Middle priority">Middle priority</option>
                                                 <option value="Low priority">Low priority</option>
                                             </select>
-                                            <div class="invalid-feedback">
-                                                Please select a valid country.
-                                            </div>
                                         </div>
 
                                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                                             <div class="flex items-center justify-end mt-4">
                                                 <button class="ml-4 btn btn-primary btn-lg">
-                                                    Create Task
+                                                    {{ __('task_manager.Create Task') }}
                                                 </button>
                                             </div>
                                         </div>

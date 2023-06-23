@@ -25,11 +25,11 @@
                                     @if (Auth::user()->id == $element->creator_user_id)
                                         <div class="col-md-3 d-flex justify-content-center themed-grid-col"><a
                                                 class=" ml-4 btn btn-primary btn-lg"
-                                                href="{{ route('delete_chat', $element->id) }}">Delete chat</a></div>
+                                                href="{{ route('delete_chat', $element->id) }}">{{ __('chat_list.Delete chat') }}</a></div>
                                     @else
                                         <div class="col-md-3 d-flex justify-content-center themed-grid-col"><a
                                                 class=" ml-4 btn btn-primary btn-lg"
-                                                href="{{ route('leave_chat', $element->id) }}">Leave chat</a></div>
+                                                href="{{ route('leave_chat', $element->id) }}">{{ __('chat_list.Leave chat') }}</a></div>
                                     @endif
                                 </div>
                                 <hr>

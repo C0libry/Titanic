@@ -14,7 +14,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{ __('menu.Login') }}</p>
 
                                     <!-- Session Status -->
                                     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -29,7 +29,8 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="email" class="block mt-1 w-full form-control" type="email"
                                                     name="email" :value="old('email')" required autofocus />
-                                                <label class="form-label" for="form3Example3c">Your Email</label>
+                                                <label class="form-label"
+                                                    for="form3Example3c">{{ __('user.Email') }}</label>
                                             </div>
                                         </div>
 
@@ -38,7 +39,8 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="password" class="form-control block mt-1 w-full" type="password"
                                                     name="password" required autocomplete="current-password" />
-                                                <label class="form-label" for="form3Example4c">Password</label>
+                                                <label class="form-label"
+                                                    for="form3Example4c">{{ __('user.Password') }}</label>
                                             </div>
                                         </div>
 
@@ -47,18 +49,16 @@
                                                 @if (Route::has('password.request'))
                                                     <a class="underline text-sm text-gray-600 hover:text-gray-900"
                                                         href="{{ route('password.request') }}">
-                                                        {{ __('Forgot your password?') }}
-                                                    </a>
+                                                        {{ __('login.Forgot your password?') }}
+                                                    </a><br><br>
                                                 @endif
 
                                                 <button class="ml-3 btn btn-primary btn-lg">
-                                                    {{ __('Log in') }}
+                                                    {{ __('menu.Login') }}
                                                 </button>
                                             </div>
                                         </div>
-
                                     </form>
-
                                 </div>
                                 <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
 

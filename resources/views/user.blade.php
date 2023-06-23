@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3 d-flex justify-content-center">
-                                <p class="mb-0">ID</p>
+                                <p class="mb-0">{{ __('user.ID') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0 d-flex justify-content-center">{{ Auth::user()->id }}</p>
@@ -21,7 +21,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3 d-flex justify-content-center">
-                                <p class="mb-0">Full Name</p>
+                                <p class="mb-0">{{ __('user.Full Name') }}</p>
                             </div>
                             <div class="col-sm-9">
                                 <p class="text-muted mb-0 d-flex justify-content-center">{{ Auth::user()->name }}
@@ -31,7 +31,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3 d-flex justify-content-center">
-                                <p class="mb-0 d-flex justify-content-center">Username</p>
+                                <p class="mb-0 d-flex justify-content-center">{{ __('user.Username') }}</p>
                             </div>
                             <div class="col-sm-9 d-flex justify-content-center">
                                 <p class="text-muted mb-0">{{ Auth::user()->username }}</p>
@@ -40,7 +40,7 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-3 d-flex justify-content-center">
-                                <p class="mb-0">Email</p>
+                                <p class="mb-0">{{ __('user.Email') }}</p>
                             </div>
                             <div class="col-sm-9 d-flex justify-content-center">
                                 <p class="text-muted mb-0">{{ Auth::user()->email }}</p>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <a class="d-flex justify-content-center ml-4 btn btn-primary btn-lg"
-                    href="{{ route('edit_user_data_page', Auth::user()->id) }}">Edit</a>
+                    href="{{ route('edit_user_data_page', Auth::user()->id) }}">{{ __('user.Edit') }}</a>
             </div>
         </div>
     </section>

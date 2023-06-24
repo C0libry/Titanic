@@ -10,17 +10,17 @@ use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
-    public function user()
+    public function index()
     {
         return view('user');
     }
 
-    public function edit_user_data_page()
+    public function edit()
     {
-        return view('edit_user_data');
+        return view('user_edit');
     }
 
-    public function update_user_data(Request $request)
+    public function update(Request $request)
     {
         $user = Auth::user();
 

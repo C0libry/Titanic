@@ -20,7 +20,7 @@
                                     <!-- Validation Errors -->
                                     <x-auth-validation-errors class="mb-4 error" :errors="$errors" />
 
-                                    <form class="mx-1 mx-md-4" method="POST" action="{{ route('add_chat') }}"
+                                    <form class="mx-1 mx-md-4" method="POST" action="{{ route('chat_list.store') }}"
                                         enctype="multipart/form-data">
                                         @csrf
 

@@ -20,9 +20,10 @@
                                     <x-auth-validation-errors class="mb-4 error" :errors="$errors" />
 
                                     <form class="mx-1 mx-md-4" method="POST"
-                                        action="{{ route('update_user_data', Auth::user()->id) }}"
+                                        action="{{ route('user.update', Auth::user()->id) }}"
                                         enctype="multipart/form-data">
                                         @csrf
+                                        @method('PATCH')
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>

@@ -16,12 +16,12 @@
 <body>
     @if (Auth::check())
         <header>
-            <a class="logo" href="{{ route('home') }}">
+            <a class="logo" href="{{ route('home.index') }}">
                 <ion-icon name="planet-outline" alt="logo"></ion-icon>
             </a>
             <nav>
                 <ul class="nav__links">
-                    <li><a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a></li>
+                    <li><a href="{{ route('chat_list.index') }}">{{ __('menu.Chat list') }}</a></li>
                     <li><a href="{{ route('user') }}">{{ Auth::user()->username }}</a></li>
                     <li><a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a></li>
                 </ul>
@@ -45,7 +45,7 @@
             </a>
             <div class="overlay__content">
                 <a href="{{ route('set_locale', __('menu.set_locale')) }}">{{ __('menu.locale') }}</a>
-                <a href="{{ route('chat_list') }}">{{ __('menu.Chat list') }}</a>
+                <a href="{{ route('chat_list.index') }}">{{ __('menu.Chat list') }}</a>
                 <a href="{{ route('user') }}">{{ Auth::user()->username }}</a>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -59,7 +59,7 @@
         </div>
     @else
         <header>
-            <a class="logo" href="{{ route('home') }}">
+            <a class="logo" href="{{ route('home.index') }}">
                 <ion-icon name="planet-outline" alt="logo"></ion-icon>
             </a>
             <nav>

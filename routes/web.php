@@ -3,49 +3,53 @@
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('set_locale')->group(function () {
-    Route::get('/', 'MainController@home')->name('home');
+    Route::get('/', 'HomeController@index')->name('home.index');
 
     Route::get('/set_locale/{locale}', 'LocaleController@set_locale')->name('set_locale');
 
     Route::middleware('auth')->group(function () {
-        Route::get('/chat_list', 'ChatController@chat_list')->name('chat_list');
+        Route::prefix('chat_list')->group(function () {
+            Route::get('/', 'ChatListController@index')->name('chat_list.index');
 
-        Route::get('/add_chat', 'ChatController@add_chat_page')->name('add_chat_page');
+            Route::get('/chat_create', 'ChatListController@chat_create')->name('chat_list.chat.create');
 
-        Route::post('/chat_list', 'ChatController@add_chat')->name('add_chat');
+            Route::post('/store', 'ChatListController@store')->name('chat_list.store');
+
+            Route::delete('/delete_chat/{id}', 'ChatListController@destroy')->whereNumber('id')->name('chat_list.chat.destroy');
+
+            Route::patch('/leave_chat/{id}', 'ChatListController@leave_chat')->whereNumber('id')->name('chat_list.chat.leave_chat');
+        });
 
         Route::prefix('chat')->group(function () {
-            Route::get('/{id}', 'ChatController@chat')->whereNumber('id')->name('chat');
+            Route::get('/{id}', 'ChatController@index')->whereNumber('id')->name('chat.index');
 
-            Route::post('/{id}', 'ChatController@add_message')->whereNumber('id')->name('add_message');
+            Route::post('/{id}', 'MessageController@store')->whereNumber('id')->name('chat.message.store');
 
-            Route::post('/add_user_to_chat/{id}', 'ChatController@add_user_to_chat')->whereNumber('id')->name('add_user_to_chat');
+            Route::post('/chat_user_store/{id}', 'ChatController@user_store')->whereNumber('id')->name('chat.user.store');
 
-            Route::post('/delete_user_from_chat/{id}', 'ChatController@delete_user_from_chat')->whereNumber('id')->name('delete_user_from_chat');
+            Route::delete('/chat_user_destroy/{id}', 'ChatController@user_destroy')->whereNumber('id')->name('chat.user.destroy');
 
-            Route::get('/delete_chat/{id}', 'ChatController@delete_chat')->whereNumber('id')->name('delete_chat');
+            Route::prefix('task_manager')->group(function () {
+                Route::get('/{id}', 'TaskManagerController@index')->whereNumber('id')->name('task_manager.index');
 
-            Route::get('/leave_chat/{id}', 'ChatController@leave_chat')->whereNumber('id')->name('leave_chat');
+                Route::prefix('task')->group(function () {
+                    Route::get('/create/{id}', 'TaskController@create')->whereNumber('id')->name('task.create');
 
-            Route::get('/delet_chat_user/{id}', 'ChatController@delet_chat_user')->whereNumber('id')->name('delet_chat_user');
+                    Route::post('/store/{chat_id}', 'TaskController@store')->whereNumber('chat_id')->name('task.store');
 
-            Route::get('/task_manager/{id}', 'ChatController@task_manager')->whereNumber('id')->name('task_manager');
+                    Route::delete('/delete_task/{task_id}', 'TaskController@destroy')->whereNumber('task_id')->name('task.destroy');
 
-            Route::get('/add_task_page/{id}', 'ChatController@add_task_page')->whereNumber('id')->name('add_task_page');
-
-            Route::post('/add_task/{chat_id}', 'ChatController@add_task')->whereNumber('chat_id')->name('add_task');
-
-            Route::get('/done_task/{task_id}', 'ChatController@done_task')->whereNumber('task_id')->name('done_task');
-
-            Route::get('/delete_task/{task_id}', 'ChatController@delete_task')->whereNumber('task_id')->name('delete_task');
+                    Route::delete('/done_task/{task_id}', 'TaskController@done_task')->whereNumber('task_id')->name('task.done_task');
+                });
+            });
         });
 
         Route::prefix('user')->group(function () {
-            Route::get('/', 'UserController@user')->name('user');
+            Route::get('/', 'UserController@index')->name('user');
 
-            Route::get('/{id}/edit', 'UserController@edit_user_data_page')->whereNumber('id')->name('edit_user_data_page');
+            Route::get('/edit/{id}', 'UserController@edit')->whereNumber('id')->name('user.edit');
 
-            Route::post('/{id}/edit', 'UserController@update_user_data')->whereNumber('id')->name('update_user_data');
+            Route::patch('/update/{id}', 'UserController@update')->whereNumber('id')->name('user.update');
         });
     });
 });

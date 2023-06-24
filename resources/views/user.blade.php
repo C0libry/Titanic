@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <a class="d-flex justify-content-center ml-4 btn btn-primary btn-lg"
-                    href="{{ route('edit_user_data_page', Auth::user()->id) }}">{{ __('user.Edit') }}</a>
+                    href="{{ route('user.edit', Auth::user()->id) }}">{{ __('user.Edit') }}</a>
             </div>
         </div>
     </section>

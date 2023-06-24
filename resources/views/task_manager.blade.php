@@ -62,16 +62,25 @@
                                             </td>
                                             <td class="align-middle">
                                                 @if ($current_chat->creator_user_id == Auth::user()->id)
-                                                    <a href="{{ route('delete_task', $element->id) }}"
-                                                        data-mdb-toggle="tooltip" title="Remove" class="icon delete">
-                                                        <ion-icon name="trash-outline"></ion-icon>
-                                                    </a>
+                                                    <form method="POST" action="{{ route('task.destroy', $element->id) }}">
+                                                        @csrf
+                                                        @method('DELETE')
+
+                                                        <button class="clear-btn">
+                                                            <ion-icon name="trash-outline"></ion-icon>
+                                                        </button>
+                                                    </form>
                                                 @else
                                                     @if ($element->task_to_user_id == Auth::user()->id)
-                                                        <a href="{{ route('done_task', $element->id) }}"
-                                                            data-mdb-toggle="tooltip" title="Done" class="icon">
-                                                            <ion-icon name="checkmark-done-outline"></ion-icon>
-                                                        </a>
+                                                        <form method="POST"
+                                                            action="{{ route('task.done_task', $element->id) }}">
+                                                            @csrf
+                                                            @method('DELETE')
+
+                                                            <button class="clear-btn">
+                                                                <ion-icon name="checkmark-done-outline"></ion-icon>
+                                                            </button>
+                                                        </form>
                                                     @endif
                                                 @endif
                                             </td>
@@ -83,7 +92,8 @@
                         </div>
                         <div class="card-footer text-end p-3">
                             <!-- <button class="me-2 btn btn-link">Cancel</button> -->
-                            <a href="{{ route('add_task_page', $current_chat->id) }}" class="btn btn-primary">{{ __('task_manager.Add Task') }}</a>
+                            <a href="{{ route('task.create', $current_chat->id) }}"
+                                class="btn btn-primary">{{ __('task_manager.Add Task') }}</a>
                         </div>
                     </div>
 

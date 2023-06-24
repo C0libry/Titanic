@@ -16,20 +16,32 @@
                             @foreach ($chats as $element)
                                 <div class="row mb-3">
                                     <a class="col-md-3 d-flex justify-content-center themed-grid-col"
-                                        href="{{ route('chat', $element->id) }}"><img class="chat_picture"
+                                        href="{{ route('chat.index', $element->id) }}"><img class="chat_picture"
                                             src="{{ $element->chat_picture }}" alt="avatar"></a>
                                     <a class="col-md-6 d-flex justify-content-center themed-grid-col"
-                                        href="{{ route('chat', $element->id) }}">
+                                        href="{{ route('chat.index', $element->id) }}">
                                         <p class="text-muted mb-0">{{ $element->name }}</p>
                                     </a>
                                     @if (Auth::user()->id == $element->creator_user_id)
-                                        <div class="col-md-3 d-flex justify-content-center themed-grid-col"><a
-                                                class=" ml-4 btn btn-primary btn-lg"
-                                                href="{{ route('delete_chat', $element->id) }}">{{ __('chat_list.Delete chat') }}</a></div>
+                                        <form class="col-md-3 d-flex justify-content-center themed-grid-col" method="POST"
+                                            action="{{ route('chat_list.chat.destroy', $element->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button class=" ml-4 btn btn-primary btn-lg">
+                                                {{ __('chat_list.Delete chat') }}
+                                            </button>
+                                        </form>
                                     @else
-                                        <div class="col-md-3 d-flex justify-content-center themed-grid-col"><a
-                                                class=" ml-4 btn btn-primary btn-lg"
-                                                href="{{ route('leave_chat', $element->id) }}">{{ __('chat_list.Leave chat') }}</a></div>
+                                        <form class="col-md-3 d-flex justify-content-center themed-grid-col" method="POST"
+                                            action="{{ route('chat_list.chat.leave_chat', $element->id) }}">
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <button class=" ml-4 btn btn-primary btn-lg">
+                                                {{ __('chat_list.Leave chat') }}
+                                            </button>
+                                        </form>
                                     @endif
                                 </div>
                                 <hr>
@@ -38,7 +50,7 @@
                     </div>
                 @endif
                 <a class="d-flex justify-content-center ml-4 btn btn-primary btn-lg"
-                    href="{{ route('add_chat_page') }}">{{ __('chat_list.Create chat') }}</a>
+                    href="{{ route('chat_list.chat.create') }}">{{ __('chat_list.Create chat') }}</a>
             </div>
         </div>
     </section>

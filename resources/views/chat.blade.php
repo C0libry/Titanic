@@ -21,7 +21,7 @@
                     <div id="plist" class="people-list">
                         @if ($current_chat->creator_user_id == Auth::user()->id)
                             <form class="input-group" method="POST"
-                                action="{{ route('add_user_to_chat', $current_chat->id) }}">
+                                action="{{ route('chat.user.store', $current_chat->id) }}">
                                 @csrf
                                 <div class="input-group-prepend">
                                     <button class="input-group-text">
@@ -33,8 +33,9 @@
                             </form>
                             <br>
                             <form class="input-group" method="POST"
-                                action="{{ route('delete_user_from_chat', $current_chat->id) }}">
+                                action="{{ route('chat.user.destroy', $current_chat->id) }}">
                                 @csrf
+                                @method('DELETE')
                                 <div class="input-group-prepend">
                                     <button class="input-group-text">
                                         <ion-icon class="delete" name="close-circle-outline"></ion-icon>
@@ -73,7 +74,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="{{ route('task_manager', $current_chat->id) }}"
+                                    <a href="{{ route('task_manager.index', $current_chat->id) }}"
                                         class="btn btn-outline-primary">{{ __('task_manager.Task manager') }}</i></a>
                                 </div>
                             </div>

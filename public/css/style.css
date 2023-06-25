@@ -50,7 +50,7 @@ header {
 }
 
 .nav__links li a:hover {
-  color: #0088a9;
+    color: #0088a9;
 }
 
 .cta {
@@ -127,6 +127,7 @@ header {
 .overlay a:focus {
     color: #0088a9;
 }
+
 .overlay .close {
     position: absolute;
     top: 20px;
@@ -136,8 +137,7 @@ header {
     cursor: pointer;
 }
 
-.close:hover
-{
+.close:hover {
     color: #0088a9;
 }
 
@@ -145,22 +145,33 @@ header {
     color: #E1341E;
 }
 
+.clear-btn {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+    background-color: transparent;
+}
+
 @media screen and (max-height: 450px) {
     .overlay a {
         font-size: 20px;
     }
+
     .overlay .close {
         font-size: 40px;
         top: 15px;
         right: 35px;
     }
-    }
+}
 
-    @media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
+
     .nav__links,
     .cta {
         display: none;
     }
+
     .menu {
         display: initial;
     }

@@ -53,7 +53,8 @@
                                     <div class="about">
                                         <div class="username">{{ $element->username }}</div>
                                         @if ($element->is_online)
-                                            <div class="status"> <i class="fa fa-circle online"></i> {{ __('user.online') }} </div>
+                                            <div class="status"> <i class="fa fa-circle online"></i>
+                                                {{ __('user.online') }} </div>
                                         @else
                                             <div class="status"> <i class="fa fa-circle offline">
                                                 </i> {{ $element->updated_at }} </div>
@@ -84,38 +85,50 @@
                                 @foreach ($messages as $element)
                                     @if (Auth::user()->id == $element->sender_user_id)
                                         <li class="clearfix">
-                                            <div class="message-data text-right my-message-data">
+                                            <div class="message-data my-message-data">
                                                 <span class="username">
-                                                    {{ DB::table('users')->where('users.id', '=', $element->sender_user_id)->select('users.username')->get()[0]->username }}</span>
-                                                <br>
-                                                <span class="message-data-time">{{ $element->created_at }}</span>
-                                                <a href="{{ route('user') }}"><img class="profile_picture"
-                                                        src="{{ Auth::user()->profile_picture }}" alt="avatar"></a>
+                                                    {{ DB::table('users')->where('users.id', '=', $element->sender_user_id)->select('users.username')->get()[0]->username }}
+                                                </span>
+                                                <div class="my-message-data-container">
+                                                    @if ($element->is_read == false)
+                                                        <i class="fa fa-circle unread"></i>
+                                                    @endif
+                                                    <form method="POST" action="{{ route('chat.message.destroy') }}">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <input type="hidden" name="message_id" value="{{ $element->id }}">
+                                                        <input type="hidden" name="current_chat_id" value="{{ $current_chat->id }}">
+                                                        <button class="clear-btn">
+                                                            <ion-icon id="delete-message" class="delete-message"
+                                                                name="trash-outline"></ion-icon>
+                                                        </button>
+                                                    </form>
+                                                    <span class="message-data-time">{{ $element->created_at }}</span>
+                                                    <a href="{{ route('user') }}"><img class="profile_picture"
+                                                            src="{{ Auth::user()->profile_picture }}" alt="avatar"></a>
+                                                </div>
                                             </div>
-                                            <div class="message my-message float-right">
-                                                @if ($element->is_read == false)
-                                                    <i class="fa fa-circle unread"></i>
-                                                @endif
-                                                <div>{{ $element->content }}</div>
-                                            </div>
+                                            <div class="message my-message float-right">{{ $element->content }}</div>
                                         </li>
                                     @else
                                         @if ($element->is_read == false)
-                                            <?php
-                                            $message = Message::find($element->id);
-                                            $message->is_read = true;
-                                            $message->update();
-                                            ?>
+                                            @php
+                                                $message = Message::find($element->id);
+                                                $message->is_read = true;
+                                                $message->update();
+                                            @endphp
                                         @endif
                                         <li class="clearfix">
                                             <div class="message-data other-message-data">
                                                 <span class="username">
-                                                    {{ DB::table('users')->where('users.id', '=', $element->sender_user_id)->select('users.username')->get()[0]->username }}</span>
-                                                <br>
-                                                <a href="{{ route('user') }}"><img class="profile_picture"
-                                                        src="{{ User::find($element->sender_user_id)->profile_picture }}"
-                                                        alt="avatar"></a>
-                                                <span class="message-data-time">{{ $element->created_at }}</span>
+                                                    {{ DB::table('users')->where('users.id', '=', $element->sender_user_id)->select('users.username')->get()[0]->username }}
+                                                </span>
+                                                <div class="other-message-data-container">
+                                                    <a href="{{ route('user') }}"><img class="profile_picture"
+                                                            src="{{ User::find($element->sender_user_id)->profile_picture }}"
+                                                            alt="avatar"></a>
+                                                    <span class="message-data-time">{{ $element->created_at }}</span>
+                                                </div>
                                             </div>
                                             <div class="message other-message">{{ $element->content }}</div>
                                         </li>

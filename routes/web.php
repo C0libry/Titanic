@@ -25,6 +25,8 @@ Route::middleware('set_locale')->group(function () {
 
             Route::post('/{id}', 'MessageController@store')->whereNumber('id')->name('chat.message.store');
 
+            Route::delete('/delete_message', 'MessageController@destroy')->name('chat.message.destroy');
+
             Route::post('/chat_user_store/{id}', 'ChatController@user_store')->whereNumber('id')->name('chat.user.store');
 
             Route::delete('/chat_user_destroy/{id}', 'ChatController@user_destroy')->whereNumber('id')->name('chat.user.destroy');

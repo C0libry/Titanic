@@ -23,4 +23,10 @@ class MessageController extends Controller
         $message->save();
         return redirect()->route('chat.index', $current_chat_id);
     }
+
+    public function destroy(Request $request)
+    {
+        DB::table('messages')->where('id', '=', $request->message_id)->delete();
+        return redirect()->route('chat.index', $request->current_chat_id);
+    }
 }

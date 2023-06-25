@@ -165,13 +165,33 @@ img {
 }
 
 .my-message-data {
-    text-align: right;
-    padding-right: 10px
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+}
+
+.my-message-data-container {
+    gap: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
 
 .other-message-data {
-    text-align: left;
-    padding-left: 10px
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.other-message-data-container {
+    gap: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 .online,
@@ -183,11 +203,12 @@ img {
 }
 
 .unread {
-    position: relative;
-    float: left;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    color: #1d8ecd
+    color: #1d8ecd;
+}
+
+.delete-message {
+    font-size: 20px;
+    color: #e47297
 }
 
 .online {
@@ -285,7 +306,7 @@ img {
 
     #show_menu {
         display: block;
-    } 
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {

@@ -5,7 +5,7 @@ let form = document.getElementById('chatForm');
 let btn = document.getElementById("show_menu");
 
 btn.addEventListener("click", show_menu);
-form.addEventListener('submit', sub);
+form.addEventListener('submit', send_message);
 chat_history.scrollTop = chat_history.scrollHeight;
 
 socket.onopen = function () {
@@ -24,33 +24,49 @@ socket.onclose = function (event) {
 
 socket.onmessage = function (event) {
     //alert("Получены данные " + event.data);
-    let requestURL = href;
-    let request = new XMLHttpRequest();
-
-    request.open('Get', requestURL, true);
-    request.onload = () => {
-        update_chat_history(request.response);
-    }
-    request.send();
+    get_chat_history();
 };
 
 socket.onerror = function (error) {
     console.log("Ошибка " + error.message);
 };
 
-function sub(event) {
-    event.preventDefault();
+async function get_chat_history() {
+    const requestURL = href;
+    const options = {
+        method: 'GET',
+    };
 
-    let requestURL = href;
-    let formData = new FormData(form);
-    let request = new XMLHttpRequest();
-    request.open('Post', requestURL, true);
-    request.onload = () => {
-        update_chat_history(request.response);
-        if (socket['readyState'] === 1) socket.send(formData.get('user_message'));
+    try {
+        const response = await fetch(requestURL, options);
+        const result = await response.text();
+        update_chat_history(result);
+        return result;
+    } catch (error) {
+        console.error(error);
     }
-    request.send(formData);
-    event.target.reset();
+}
+
+async function send_message(event) {
+    event.preventDefault();
+    let formData = new FormData(form);
+    const requestURL = href;
+    const options = {
+        method: 'POST',
+        body: formData,
+    };
+
+    try {
+        const response = await fetch(requestURL, options);
+        const result = await response.text();
+        update_chat_history(result);
+        if (socket['readyState'] === 1) socket.send(formData.get('user_message'));
+        event.target.reset();
+        console.log('fetch');
+        return result;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function update_chat_history(out) {

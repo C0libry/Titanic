@@ -28,7 +28,7 @@ class TaskManagerController extends Controller
             ->select('users.username', 'users.profile_picture', 'users.is_online', 'users.updated_at')
             ->get();
 
-        $tasks = DB::table('task_manager')->where('task_manager.chat_id', '=', $current_chat_id)->get();
+        $tasks = DB::table('tasks')->where('tasks.chat_id', '=', $current_chat_id)->get();
 
         return view('task_manager')
             ->with('tasks', $tasks)

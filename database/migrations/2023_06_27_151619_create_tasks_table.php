@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
 
-class CreateTaskManagerTable extends Migration
+class CreateTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateTaskManagerTable extends Migration
      */
     public function up()
     {
-        Schema::create('task_manager', function (Blueprint $table) {
+        Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('chat_id');
             $table->foreign('chat_id')->references('id')->on('chats')->onUpdate('cascade')->onDelete('cascade');
@@ -25,7 +25,7 @@ class CreateTaskManagerTable extends Migration
             $table->boolean('is_done')->default(false);;
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE task_manager MODIFY COLUMN task_priority ENUM('High priority', 'Middle priority', 'Low priority')");
+        DB::statement("ALTER TABLE tasks MODIFY COLUMN task_priority ENUM('High priority', 'Middle priority', 'Low priority')");
     }
 
     /**
@@ -35,6 +35,6 @@ class CreateTaskManagerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_manager');
+        Schema::dropIfExists('tasks');
     }
 }

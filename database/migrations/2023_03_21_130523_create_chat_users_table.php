@@ -14,9 +14,9 @@ class CreateChatUsersTable extends Migration
     public function up()
     {
         Schema::create('chat_users', function (Blueprint $table) {
-            $table->bigInteger('chat_id')->unsigned()->index()->nullable();
+            $table->unsignedBigInteger('chat_id');
             $table->foreign('chat_id')->references('id')->on('chats')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('user_id')->unsigned()->index()->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->primary(['chat_id', 'user_id']);
             $table->timestamps();

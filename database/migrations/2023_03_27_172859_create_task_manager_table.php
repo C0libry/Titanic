@@ -16,9 +16,9 @@ class CreateTaskManagerTable extends Migration
     {
         Schema::create('task_manager', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('chat_id')->unsigned()->index()->nullable();
+            $table->unsignedBigInteger('chat_id');
             $table->foreign('chat_id')->references('id')->on('chats')->onUpdate('cascade')->onDelete('cascade');
-            $table->bigInteger('task_to_user_id')->unsigned()->index()->nullable();
+            $table->unsignedBigInteger('task_to_user_id');
             $table->foreign('task_to_user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('content', 300);
             $table->string('task_priority');

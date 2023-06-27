@@ -9,4 +9,14 @@ class Message extends Model
 {
     use HasFactory;
     protected $table = 'messages';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'sender_user_id', 'id');
+    }
+
+    public function chat()
+    {
+        return $this->belongsTo(Chat::class);
+    }
 }

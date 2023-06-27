@@ -52,4 +52,24 @@ class User extends Authenticatable
             ->select('users.*')
             ->first();
     }
+
+    public function created_chats()
+    {
+        return $this->hasMany(Chat::class, 'creator_user_id', 'id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Chat::class, 'sender_user_id', 'id');
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Chat::class, 'task_to_user_id', 'id');
+    }
+
+    public function chats()
+    {
+        return $this->belongsToMany(Chat::class, 'chat_users', 'user_id', 'chat_id');
+    }
 }

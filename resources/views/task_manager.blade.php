@@ -27,34 +27,34 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tasks as $element)
+                                    @foreach ($tasks as $task)
                                         <tr class="fw-normal">
                                             <th>
                                                 <img class="ms-2"
                                                     src="
-                          {{ DB::table('users')->where('users.id', '=', $element->task_to_user_id)->select('users.profile_picture')->get()[0]->profile_picture }}
+                          {{ DB::table('users')->where('users.id', '=', $task->task_to_user_id)->select('users.profile_picture')->get()[0]->profile_picture }}
                               "style="width: 55px; height: auto; border-radius: 50%;">
                                                 <span class="ms-2">
-                                                    {{ DB::table('users')->where('users.id', '=', $element->task_to_user_id)->select('users.username')->get()[0]->username }}</span>
+                                                    {{ DB::table('users')->where('users.id', '=', $task->task_to_user_id)->select('users.username')->get()[0]->username }}</span>
                                             </th>
                                             <td class="align-middle">
-                                                <span>{{ $element->content }}</span>
+                                                <span>{{ $task->content }}</span>
                                             </td>
                                             <td class="align-middle">
-                                                @switch ($element->task_priority)
+                                                @switch ($task->task_priority)
                                                     @case('High priority')
                                                         <h6 class="mb-0"><span
-                                                                class="badge bg-danger">{{ $element->task_priority }}</span></h6>
+                                                                class="badge bg-danger">{{ $task->task_priority }}</span></h6>
                                                     @break
 
                                                     @case('Middle priority')
                                                         <h6 class="mb-0"><span
-                                                                class="badge bg-warning">{{ $element->task_priority }}</span></h6>
+                                                                class="badge bg-warning">{{ $task->task_priority }}</span></h6>
                                                     @break
 
                                                     @case('Low priority')
                                                         <h6 class="mb-0"><span
-                                                                class="badge bg-success">{{ $element->task_priority }}</span></h6>
+                                                                class="badge bg-success">{{ $task->task_priority }}</span></h6>
                                                     @break
 
                                                     @default
@@ -62,7 +62,7 @@
                                             </td>
                                             <td class="align-middle">
                                                 @if ($current_chat->creator_user_id == Auth::user()->id)
-                                                    <form method="POST" action="{{ route('task.destroy', $element->id) }}">
+                                                    <form method="POST" action="{{ route('task.destroy', $task->id) }}">
                                                         @csrf
                                                         @method('DELETE')
 
@@ -71,9 +71,9 @@
                                                         </button>
                                                     </form>
                                                 @else
-                                                    @if ($element->task_to_user_id == Auth::user()->id)
+                                                    @if ($task->task_to_user_id == Auth::user()->id)
                                                         <form method="POST"
-                                                            action="{{ route('task.done_task', $element->id) }}">
+                                                            action="{{ route('task.done_task', $task->id) }}">
                                                             @csrf
                                                             @method('DELETE')
 

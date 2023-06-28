@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -64,5 +65,13 @@ class UserController extends Controller
         }
         $user->save();
         return redirect()->intended(RouteServiceProvider::HOME);
+    }
+
+    public function check_username($username)
+    {
+        if (!User::where('username', $username)->exists())
+            return 1;
+        else
+            return 0;
     }
 }

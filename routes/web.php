@@ -7,6 +7,8 @@ Route::middleware('set_locale')->group(function () {
 
     Route::get('/set_locale/{locale}', 'LocaleController@set_locale')->name('set_locale');
 
+    Route::get('/check_username/{username}', 'UserController@check_username')->name('check_username');
+
     Route::middleware('auth')->group(function () {
         Route::prefix('chat_list')->group(function () {
             Route::get('/', 'ChatListController@index')->name('chat_list.index');

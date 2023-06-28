@@ -2,6 +2,7 @@
 
 @section('head')
     <title>Register</title>
+    <script type="text/javascript" src="{{ asset('js/register.js') }}" defer></script>
 @endsection
 
 @section('main_content')
@@ -48,6 +49,8 @@
                                                 <label class="form-label">{{ __('user.Username') }}</label>
                                             </div>
                                         </div>
+
+                                        <div id="username_check"></div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>

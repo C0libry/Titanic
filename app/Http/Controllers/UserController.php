@@ -23,7 +23,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::user()->id);
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -55,7 +55,7 @@ class UserController extends Controller
             ]);
             $image = Image::make($request->file('profile_picture'));
             $filename  = time() . $request->file('profile_picture')->getClientOriginalName();
-            
+
             $name = (string) $filename;
 
             $path = 'uploads/public/images/Users profile pictures/' . $name;
@@ -63,7 +63,7 @@ class UserController extends Controller
             $image->save($path);
             $user->profile_picture = '/' . $path;
         }
-        $user->save();
+        $user->update();
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
@@ -73,5 +73,11 @@ class UserController extends Controller
             return 1;
         else
             return 0;
+    }
+
+    public function find_user($username)
+    {
+        return User::query()
+            ->where('username', 'like', '{$username}%');
     }
 }

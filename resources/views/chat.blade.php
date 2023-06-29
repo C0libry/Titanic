@@ -1,8 +1,3 @@
-@php
-    use App\Models\User;
-    use App\Models\Message;
-@endphp
-
 @extends('layout')
 
 @section('head')
@@ -46,18 +41,18 @@
                             </form>
                         @endif
                         <ul class="list-unstyled chat-list mt-2 mb-0">
-                            @foreach ($current_chat_users as $element)
+                            @foreach ($current_chat_users as $users)
                                 <li class="clearfix">
-                                    <a href="{{ route('user') }}"><img class="" src="{{ $element->profile_picture }}"
+                                    <a href="{{ route('user') }}"><img class="" src="{{ $users->profile_picture }}"
                                             alt="avatar"></a>
                                     <div class="about">
-                                        <div class="username">{{ $element->username }}</div>
-                                        @if ($element->is_online)
+                                        <div class="username">{{ $users->username }}</div>
+                                        @if ($users->is_online)
                                             <div class="status"> <i class="fa fa-circle online"></i>
                                                 {{ __('user.online') }} </div>
                                         @else
                                             <div class="status"> <i class="fa fa-circle offline">
-                                                </i> {{ $element->updated_at }} </div>
+                                                </i> {{ $users->updated_at->diffForHumans() }} </div>
                                         @endif
                                     </div>
                                 </li>
@@ -82,55 +77,49 @@
                         </div>
                         <div class="chat-history" id="chat-history">
                             <ul class="m-b-0">
-                                @foreach ($messages as $element)
-                                    @if (Auth::user()->id == $element->sender_user_id)
+                                @foreach ($messages as $message)
+                                    @if (Auth::user()->id == $message->sender_user_id)
                                         <li class="clearfix">
                                             <div class="message-data my-message-data">
                                                 <span class="username">
-                                                    {{ DB::table('users')->where('users.id', '=', $element->sender_user_id)->select('users.username')->get()[0]->username }}
+                                                    {{ $message->user->username }}
                                                 </span>
                                                 <div class="my-message-data-container">
-                                                    @if ($element->is_read == false)
+                                                    @if ($message->is_read == false)
                                                         <i class="fa fa-circle unread"></i>
                                                     @endif
                                                     <form method="POST" action="{{ route('chat.message.destroy') }}">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <input type="hidden" name="message_id" value="{{ $element->id }}">
-                                                        <input type="hidden" name="current_chat_id" value="{{ $current_chat->id }}">
+                                                        <input type="hidden" name="message_id"
+                                                            value="{{ $message->id }}">
+                                                        <input type="hidden" name="current_chat_id"
+                                                            value="{{ $current_chat->id }}">
                                                         <button class="clear-btn">
                                                             <ion-icon id="delete-message" class="delete-message"
                                                                 name="trash-outline"></ion-icon>
                                                         </button>
                                                     </form>
-                                                    <span class="message-data-time">{{ $element->created_at }}</span>
+                                                    <span class="message-data-time">{{ $message->created_at->diffForHumans() }}</span>
                                                     <a href="{{ route('user') }}"><img class="profile_picture"
                                                             src="{{ Auth::user()->profile_picture }}" alt="avatar"></a>
                                                 </div>
                                             </div>
-                                            <div class="message my-message float-right">{{ $element->content }}</div>
+                                            <div class="message my-message float-right">{{ $message->content }}</div>
                                         </li>
                                     @else
-                                        @if ($element->is_read == false)
-                                            @php
-                                                $message = Message::find($element->id);
-                                                $message->is_read = true;
-                                                $message->update();
-                                            @endphp
-                                        @endif
                                         <li class="clearfix">
                                             <div class="message-data other-message-data">
                                                 <span class="username">
-                                                    {{ DB::table('users')->where('users.id', '=', $element->sender_user_id)->select('users.username')->get()[0]->username }}
+                                                    {{ $message->user->username }}
                                                 </span>
                                                 <div class="other-message-data-container">
                                                     <a href="{{ route('user') }}"><img class="profile_picture"
-                                                            src="{{ User::find($element->sender_user_id)->profile_picture }}"
-                                                            alt="avatar"></a>
-                                                    <span class="message-data-time">{{ $element->created_at }}</span>
+                                                            src="{{ $message->user->profile_picture }}" alt="avatar"></a>
+                                                    <span class="message-data-time">{{ $message->created_at->diffForHumans() }}</span>
                                                 </div>
                                             </div>
-                                            <div class="message other-message">{{ $element->content }}</div>
+                                            <div class="message other-message">{{ $message->content }}</div>
                                         </li>
                                     @endif
                                 @endforeach

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -45,14 +44,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function find_by_username($username)
-    {
-        return DB::table('users')
-            ->where('users.username', '=', $username)
-            ->select('users.*')
-            ->first();
-    }
-
     public function created_chats()
     {
         return $this->hasMany(Chat::class, 'creator_user_id', 'id');
@@ -71,5 +62,10 @@ class User extends Authenticatable
     public function chats()
     {
         return $this->belongsToMany(Chat::class, 'chat_users', 'user_id', 'chat_id');
+    }
+
+    public function chats_ids()
+    {
+        return $this->hasMany(ChatUser::class, 'task_to_user_id', 'id');
     }
 }

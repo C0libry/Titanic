@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Models\Message;
 
 class MessageController extends Controller
@@ -26,7 +25,7 @@ class MessageController extends Controller
 
     public function destroy(Request $request)
     {
-        DB::table('messages')->where('id', '=', $request->message_id)->delete();
+        Message::query()->where('id', $request->message_id)->delete();
         return redirect()->route('chat.index', $request->current_chat_id);
     }
 }

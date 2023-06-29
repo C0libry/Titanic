@@ -32,10 +32,10 @@
                                             <th>
                                                 <img class="ms-2"
                                                     src="
-                          {{ DB::table('users')->where('users.id', '=', $task->task_to_user_id)->select('users.profile_picture')->get()[0]->profile_picture }}
+                          {{ $task->user->profile_picture }}
                               "style="width: 55px; height: auto; border-radius: 50%;">
                                                 <span class="ms-2">
-                                                    {{ DB::table('users')->where('users.id', '=', $task->task_to_user_id)->select('users.username')->get()[0]->username }}</span>
+                                                    {{ $task->user->username }}</span>
                                             </th>
                                             <td class="align-middle">
                                                 <span>{{ $task->content }}</span>

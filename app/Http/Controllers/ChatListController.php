@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Chat;
 use App\Models\ChatUser;
@@ -14,12 +13,11 @@ class ChatListController extends Controller
 {
     public function index()
     {
-        $chats = DB::table('chats')
-            ->join('chat_users', 'chats.id', '=', 'chat_users.chat_id')
-            ->where('chat_users.user_id', '=', Auth::user()->id)
+        $chats = Chat::query()
+            ->join('chat_users', 'chats.id', 'chat_users.chat_id')
+            ->where('chat_users.user_id', Auth::user()->id)
             ->select('chats.*')
             ->get();
-        // DB::table('chats')->where('chats.id', '=', 19)->select('chats.chat_picture')->get()[0]->chat_picture;
         return view('chat_list', ['chats' => $chats]);
     }
 
@@ -66,22 +64,22 @@ class ChatListController extends Controller
 
     public function destroy($current_chat_id)
     {
-        $chat = DB::table('chats')
-            ->where('chats.id', '=', $current_chat_id)
-            ->where('chats.creator_user_id', '=', Auth::user()->id)
+        $chat = Chat::query()
+            ->where('chats.id', $current_chat_id)
+            ->where('chats.creator_user_id', Auth::user()->id)
             ->select('chats.*')
             ->first();
         if ($chat !== null) {
             if ($chat->chat_picture != '/uploads/public/images/Chats pictures/default_chat_picture.svg')
                 Storage::disk('public_uploads')->delete(mb_substr($chat->chat_picture, 9));
-            DB::table('chats')->where('id', '=', $current_chat_id)->delete();
+            Chat::find($current_chat_id)->delete();
         }
         return redirect()->route('chat_list.index');
     }
 
     public function leave_chat($current_chat_id)
     {
-        DB::table('chat_users')->where('user_id', '=', Auth::user()->id)->where('chat_id', '=', $current_chat_id)->delete();
+        ChatUser::query()->where('user_id', Auth::user()->id)->where('chat_id', $current_chat_id)->delete();
         return redirect()->route('chat_list.index');
     }
 }

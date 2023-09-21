@@ -177,6 +177,90 @@ header {
     cursor: default;
 }
 
+.home__intro {
+    margin: auto;
+    margin-top: 150px;
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    min-height: 500px;
+}
+
+.intro a {
+    text-decoration: none;
+    /* display: inline !important; */
+}
+
+.intro__info {
+    width: 80vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 30px;
+}
+
+.intro__info img {
+    width: 50vw;
+}
+
+
+.contacts {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    background: #2f2f2f;
+}
+
+.contacts a {
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contacts ion-icon {
+    padding: 10px;
+    font-size: 2em;
+    color: #ffffff;
+}
+
+.contacts__info-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.contacts__info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+}
+
+.contacts__info-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #ffffff;
+}
+
+.contacts__icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 @media screen and (max-height: 450px) {
     .overlay a {
         font-size: 20px;
@@ -196,7 +280,24 @@ header {
         display: none;
     }
 
+    .cta--home {
+        display: block;
+    }
+
     .menu {
         display: initial;
+    }
+
+    .intro__info {
+        width: 80vw;
+        flex-direction: column;
+    }
+
+    .intro__info img {
+        width: 80vw;
+    }
+
+    .contacts {
+        flex-direction: column;
     }
 }

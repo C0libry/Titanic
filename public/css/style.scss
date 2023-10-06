@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:ital@1&display=swap");
+
+$accent: #0088a9;
+$light: #edf0f1;
+$dark: #24252a;
+$error: #e1341e;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+}
+
+ion-icon {
+    font-size: 64px;
+    color: $accent;
+}
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+    background-color: $dark;
+}
+
+.logo {
+    margin-right: auto;
+}
+
+.nav__links {
+    list-style: none;
+    display: flex;
+}
+
+.nav__links a,
+.cta,
+.overlay__content a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: $light;
+    text-decoration: none;
+}
+
+.nav__links li {
+    padding: 0px 20px;
+}
+
+.nav__links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover {
+    color: $accent;
+}
+
+.cta {
+    margin-left: 20px;
+    padding: 9px 25px;
+    background-color: $accent;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+.cta:hover {
+    background-color: rgba(0, 136, 169, 0.8);
+    color: $dark;
+}
+
+.logout {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: $light;
+    text-decoration: none;
+}
+
+.logout:hover {
+    color: $dark;
+}
+
+.profile_picture {
+    fill: $accent;
+    width: 45px;
+    border-radius: 50%;
+}
+
+/* Mobile Nav */
+
+.menu {
+    display: none;
+}
+
+.overlay {
+    font-family: "Montserrat", sans-serif;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    background-color: $dark;
+    overflow-x: hidden;
+    transition: all 0.5s ease 0s;
+
+    a {
+        padding: 15px;
+        font-size: 36px;
+        display: block;
+        transition: all 0.3s ease 0s;
+        &:hover,
+        &:focus {
+            color: $accent;
+        }
+    }
+    &--active {
+        width: 100%;
+    }
+
+    &__content {
+        display: flex;
+        height: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.overlay .close {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+    color: $light;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: $accent;
+}
+
+.error {
+    color: $error;
+}
+
+.clear-btn {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+    background-color: transparent;
+}
+
+.errors {
+    text-align: center;
+    margin: 10px;
+    padding: 8px;
+    background: $error;
+    border-radius: 5px;
+    bottom: 30px;
+    min-width: 400px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: default;
+}
+
+.ok {
+    text-align: center;
+    margin: 10px;
+    padding: 8px;
+    background: $accent;
+    border-radius: 5px;
+    bottom: 30px;
+    min-width: 400px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    cursor: default;
+}
+
+.home {
+    &__intro {
+        margin: auto;
+        margin-top: 150px;
+    }
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    min-height: 500px;
+
+    &__info {
+        width: 80vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 30px;
+    }
+
+    &__info img {
+        width: 50vw;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.contacts {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    height: 100px;
+    width: 100%;
+    background: #2f2f2f;
+
+    &__info-block {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    &__info {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+        gap: 15px;
+    }
+
+    &__info-text {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    &__icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    a {
+        text-decoration: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ion-icon {
+        padding: 10px;
+        font-size: 2em;
+        color: #ffffff;
+    }
+}
+
+@media screen and (max-height: 450px) {
+    .overlay a {
+        font-size: 20px;
+    }
+
+    .overlay .close {
+        font-size: 40px;
+        top: 15px;
+        right: 35px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .nav__links,
+    .cta {
+        display: none;
+        &--home {
+            display: block;
+        }
+    }
+
+    .menu {
+        display: initial;
+    }
+
+    .contacts {
+        flex-direction: column;
+    }
+}

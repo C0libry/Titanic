@@ -1,30 +1,27 @@
-const username = document.getElementById('username');
-username.addEventListener('blur', check_username);
+const username = document.getElementById("username");
+username.addEventListener("change", check_username);
 
 async function check_username() {
-    const requestURL = '/check_username/' + username.value;
+    const requestURL = "/is_username_exist?username=" + username.value;
     const options = {
-        method: 'GET',
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+        },
     };
 
     try {
         const response = await fetch(requestURL, options);
-        const result = await response.text();
-        if (response.status === 200) change_tags(result);
+        const result = await response.json();
+        response.status === 200 ? is_invalid(result.data) : is_invalid(true);
         return result;
     } catch (error) {
         console.error(error);
     }
 }
 
-function change_tags(response) {
-    let elem = document.getElementById('username_check');
-
-    if (response == 1) {
-        elem.textContent = 'Логин свободен';
-        elem.className = 'ok';
-    } else {
-        elem.textContent = 'Логин занят';
-        elem.className = 'errors';
-    }
+function is_invalid(isInvalid) {
+    username.className = isInvalid
+        ? "form-control block mt-1 w-full is-invalid"
+        : "form-control block mt-1 w-full is-valid";
 }

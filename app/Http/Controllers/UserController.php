@@ -35,7 +35,7 @@ class UserController extends Controller
 
         if (Auth::user()->username != $request->input('username')) {
             $request->validate([
-                'username' => ['required', 'string', 'max:255', 'unique:users']
+                'username' => ['required', 'string', 'regex:/^[a-zA-Z0-9_]+$/', 'max:255', 'unique:users']
             ]);
             $user->username = $request->input('username');
         }
@@ -68,12 +68,12 @@ class UserController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
-    public function check_username($username)
+    public function is_username_exist(Request $request)
     {
-        if (!User::where('username', $username)->exists())
-            return 1;
-        else
-            return 0;
+        $request->validate([
+            'username' => ['required', 'string', 'regex:/^[a-zA-Z0-9_]+$/', 'max:255']
+        ]);
+        return response()->json(['data' => User::where('username', $request->username)->exists()]);
     }
 
     public function find_user($username)

@@ -47,12 +47,11 @@
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="username" class="form-control block mt-1 w-full" type="text"
-                                                    name="username" :value="old('username')" required />
+                                                    name="username" :value="old('username')" pattern="^[a-zA-Z0-9_]+$"
+                                                    required />
                                                 <label class="form-label">{{ __('user.Username') }}</label>
                                             </div>
                                         </div>
-
-                                        <div id="username_check"></div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>

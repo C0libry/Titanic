@@ -2,6 +2,7 @@
 
 @section('head')
     <title>Edit user data</title>
+    <script type="text/javascript" src="{{ asset('js/register.js') }}" defer></script>
 @endsection
 
 @section('main_content')
@@ -51,7 +52,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="username" class="form-control block mt-1 w-full" type="text"
                                                     name="username" value="{{ Auth::user()->username }}"
-                                                    :value="old('username')" required />
+                                                    :value="old('username')" pattern="^[a-zA-Z0-9_]+$" required />
                                                 <label class="form-label">{{ __('user.Username') }}</label>
                                             </div>
                                         </div>

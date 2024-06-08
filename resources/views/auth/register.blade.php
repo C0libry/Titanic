@@ -27,7 +27,8 @@
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="name" class="form-control block mt-1 w-full" type="text"
-                                                    name="name" :value="old('name')" required autofocus />
+                                                    name="name" :value="old('name')"
+                                                    pattern="(^[A-Z][a-z]+$)|(^[А-Я][а-я]+$)" required autofocus />
                                                 <label class="form-label">{{ __('user.Name') }}</label>
                                             </div>
                                         </div>
@@ -36,7 +37,8 @@
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="surname" class="form-control block mt-1 w-full" type="text"
-                                                    name="surname" :value="old('surname')" required autofocus />
+                                                    name="surname" :value="old('surname')"
+                                                    pattern="(^[A-Z][a-z]+$)|(^[А-Я][а-я]+$)" required />
                                                 <label class="form-label">{{ __('user.Surname') }}</label>
                                             </div>
                                         </div>
@@ -45,7 +47,7 @@
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="username" class="form-control block mt-1 w-full" type="text"
-                                                    name="username" :value="old('username')" required autofocus />
+                                                    name="username" :value="old('username')" required />
                                                 <label class="form-label">{{ __('user.Username') }}</label>
                                             </div>
                                         </div>
@@ -56,7 +58,8 @@
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="email" class="form-control block mt-1 w-full" type="email"
-                                                    name="email" :value="old('email')" required />
+                                                    name="email" :value="old('email')"
+                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
                                                 <label class="form-label">{{ __('user.Email') }}</label>
                                             </div>
                                         </div>
@@ -80,7 +83,8 @@
                                         </div>
 
                                         <div class="form-check d-flex justify-content-center mb-5">
-                                            <input class="form-check-input me-2" id="agreement" name="agreement" type="checkbox" value="1" />
+                                            <input class="form-check-input me-2" id="agreement" name="agreement"
+                                                type="checkbox" value="1" />
                                             <label class="form-check-label">
                                                 {{ __('register.I agree all statements in') }} <a
                                                     href="#!">{{ __('register.Terms of service') }}</a>

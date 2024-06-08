@@ -26,8 +26,8 @@ class UserController extends Controller
         $user = User::find(Auth::user()->id);
 
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255']
+            'name' => ['required', 'string', 'regex:/(^[A-Z][a-z]+$)|(^[А-Я][а-я]+$)/u', 'max:255'],
+            'surname' => ['required', 'string', 'regex:/(^[A-Z][a-z]+$)|(^[А-Я][а-я]+$)/u', 'max:255']
         ]);
 
         $user->name = $request->input('name');
@@ -42,19 +42,20 @@ class UserController extends Controller
 
         if (Auth::user()->email != $request->input('email')) {
             $request->validate([
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users']
+                'email' => ['required', 'string', 'email', 'regex:/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/u', 'max:255', 'unique:users']
             ]);
             $user->email = $request->input('email');
         }
 
         if ($request->file('profile_picture')) {
             if (Auth::user()->profile_picture != '/uploads/public/images/Users profile pictures/default_profile_picture.svg')
-                Storage::disk('public_uploads')->delete(mb_substr(Auth::user()->profile_picture, 9));
+                dd(mb_substr(Auth::user()->profile_picture, 9));
+            Storage::disk('public_uploads')->delete(mb_substr(Auth::user()->profile_picture, 9));
             $request->validate([
                 'profile_picture' => ['required', 'image:jpg, jpeg, png', 'dimensions:min_width:300, min_height:300']
             ]);
             $image = Image::make($request->file('profile_picture'));
-            $filename  = time() . $request->file('profile_picture')->getClientOriginalName();
+            $filename = time() . $request->file('profile_picture')->getClientOriginalName();
 
             $name = (string) $filename;
 

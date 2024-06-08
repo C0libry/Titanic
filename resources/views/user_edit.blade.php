@@ -14,14 +14,14 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{ __('user.Edit user data') }}</p>
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{ __('user.Edit user data') }}
+                                    </p>
 
                                     <!-- Validation Errors -->
                                     <x-auth-validation-errors class="mb-4 error" :errors="$errors" />
 
                                     <form class="mx-1 mx-md-4" method="POST"
-                                        action="{{ route('user.update', Auth::user()->id) }}"
-                                        enctype="multipart/form-data">
+                                        action="{{ route('user.update', Auth::user()->id) }}" enctype="multipart/form-data">
                                         @csrf
                                         @method('PATCH')
 
@@ -30,7 +30,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="name" class="form-control block mt-1 w-full" type="text"
                                                     name="name" value="{{ Auth::user()->name }}" :value="old('name')"
-                                                    required autofocus />
+                                                    pattern="(^[A-Z][a-z]+$)|(^[А-Я][а-я]+$)" required autofocus />
                                                 <label class="form-label">{{ __('user.Name') }}</label>
                                             </div>
                                         </div>
@@ -40,7 +40,8 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="surname" class="form-control block mt-1 w-full" type="text"
                                                     name="surname" value="{{ Auth::user()->surname }}"
-                                                    :value="old('surname')" required autofocus />
+                                                    :value="old('surname')" pattern="(^[A-Z][a-z]+$)|(^[А-Я][а-я]+$)"
+                                                    required />
                                                 <label class="form-label">{{ __('user.Surname') }}</label>
                                             </div>
                                         </div>
@@ -50,7 +51,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="username" class="form-control block mt-1 w-full" type="text"
                                                     name="username" value="{{ Auth::user()->username }}"
-                                                    :value="old('username')" required autofocus />
+                                                    :value="old('username')" required />
                                                 <label class="form-label">{{ __('user.Username') }}</label>
                                             </div>
                                         </div>
@@ -60,7 +61,7 @@
                                             <div class="form-outline flex-fill mb-0">
                                                 <input id="email" class="form-control block mt-1 w-full" type="email"
                                                     name="email" value="{{ Auth::user()->email }}" :value="old('email')"
-                                                    required />
+                                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required />
                                                 <label class="form-label">{{ __('user.Email') }}</label>
                                             </div>
                                         </div>
